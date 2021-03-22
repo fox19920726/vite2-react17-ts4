@@ -8,8 +8,12 @@
     "lint": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx src"
   },
   "dependencies": {
+    "antd": "^4.13.0",
+    "axios": "^0.21.1",
+    "js-cookie": "^2.2.1",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
