@@ -1,5 +1,16 @@
 import React from 'react'
+import { IUserInfo, IUserState } from '@/types/userInterface'
 
-const UserContext = React.createContext({})
+const state:IUserInfo = {
+  roleId: 0,
+  roleName: '',
+  token: '',
+  userId: 0,
+  userName: ''
+}
+
+const handleInfo = ():void => {}
+
+const UserContext = React.createContext({ state, handleInfo })
 
 export default UserContext

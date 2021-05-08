@@ -2,6 +2,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import legacy from '@vitejs/plugin-legacy'
+// import { mocks } from './src/plugins/index'
 // import { eslint } from 'rollup-plugin-eslint'
 
 // https://vitejs.dev/config/
@@ -21,6 +22,7 @@ export default defineConfig({
         'last 3 iOS versions'
       ]
     }),
+    // mocks(),
     // {
     //   ...eslint({
     //     include: 'src/*.tsx',

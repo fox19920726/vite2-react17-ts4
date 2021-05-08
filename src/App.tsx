@@ -1,12 +1,11 @@
 import React, { FC, useReducer, useEffect } from 'react'
-import { DatePicker } from 'antd'
 import 'antd/dist/antd.css'
 import '@/styles/App.scss'
 import { getToken } from '@/utils/cookie'
 import UserContext from '@/contexts/userContext'
-import Nav from '@/views/layout/nav/index'
+import NavBar from '@/views/Layout/nav'
 import { getUserInfo } from '@/api/api'
-import { IUserInfo, IUserState } from '@/types/userInterface'
+import { IUserInfo, IUserState, IData } from '@/types/userInterface'
 
 const user: IUserInfo = {
   roleId: 0,
@@ -35,8 +34,7 @@ const App: FC = () => {
   const [state, dispatch] = useReducer(userInfoReducer, user)
 
   const handleInfo = async (): Promise<void> => {
-    const data = await getUserInfo(getToken())
-
+    const { data } = await getUserInfo(getToken())
     dispatch({
       type: 'setInfo',
       payload: data
@@ -53,7 +51,7 @@ const App: FC = () => {
   return (
     <UserContext.Provider value={{ state, handleInfo }}>
       <div className="app">
-        <Nav />
+        <NavBar />
       </div>
     </UserContext.Provider>
   )

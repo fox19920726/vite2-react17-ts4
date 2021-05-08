@@ -1,45 +1,33 @@
-
-// const modules = {}
-
 // const requireContext = import.meta.globEager('./src/*.tsx')
+// const aa = ['Dashbord', 'List', 'Login', 'Todo']
+// import.meta.glob('/src/views/Login/*.tsx')
+// import.meta.glob('/src/views/Login/*.tsx')
 
-console.log('33:', import.meta.glob('/src/*.tsx'))
-
-
-
-
-// requireContext.keys().forEach((key) => {
-//   const mod = requireContext(key)
-//   if (mod.default) {
-//     modules[mod.default.name] = mod.__esModule && mod.default ? mod.default : mod
-//   }
-// })
+import Dashbord from '@/views/Dashbord'
+import List from '@/views/List'
+import Login from '@/views/Login'
+import Todo from '@/views/Todo'
 
 const paths = [{
   'path': '/dashbord',
   'name': 'Dashbord',
-  'component': 'Dashbord',
+  'component': Dashbord,
   'show': true
 }, {
   'path': '/',
   'name': 'Login',
-  'component': 'Login',
+  'component': Login,
   'show': true
 }, {
   'path': '/list',
   'name': 'List',
-  'component': 'List',
+  'component': List,
   'show': true
 }, {
   'path': '/todo',
   'name': 'Todo',
-  'component': 'Todo',
+  'component': Todo,
   'show': true
 }]
-
-// paths.forEach((item) => {
-//   item.component = modules[item.name];
-// })
-
 
 export default paths

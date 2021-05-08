@@ -3,8 +3,8 @@ import { IData, IUserInfo } from '@/types/userInterface'
 
 // AxiosResponse
 
-export function getUserInfo(token: string): Promise<IUserInfo> {
-  return request<IUserInfo>({
+export function getUserInfo(token: string): Promise<IData> {
+  return request<IData>({
     url: '/user/info',
     method: 'get',
     params: token

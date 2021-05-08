@@ -1,12 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getToken, removeToken } from './cookie'
 
-const isProduction = process.env.NODE_ENV === 'production'
-const originBaseUrl = process.env.BASE_URL
-const isBaseUrl = window?.g?.BASE_URL || originBaseUrl
+// const isProduction = 'production'
+// const isServer = 'local'
 
 const service = axios.create({
-  baseURL: isProduction ? isBaseUrl : process.env.BASE_URL,
+  baseURL: '',
   timeout: 10000
 })
 
