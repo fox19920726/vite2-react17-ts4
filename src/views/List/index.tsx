@@ -5,9 +5,7 @@ import UserContext from '@/contexts/userContext'
 // Consumer下面只能写一个函数
 
 const List: FC = () => {
-
   const { state: { userName, roleName }, handleInfo } = useContext(UserContext)
-
   return (
     <div>
       <p>我叫：{userName}</p>

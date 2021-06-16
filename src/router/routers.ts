@@ -1,33 +1,56 @@
 // const requireContext = import.meta.globEager('./src/*.tsx')
-// const aa = ['Dashbord', 'List', 'Login', 'Todo']
+// const aa = ['Dashbord', 'List', 'Login', ''Todo'']
 // import.meta.glob('/src/views/Login/*.tsx')
 // import.meta.glob('/src/views/Login/*.tsx')
 
-import Dashbord from '@/views/Dashbord'
-import List from '@/views/List'
-import Login from '@/views/Login'
-import Todo from '@/views/Todo'
+import { IRoute } from "@/types/menuInterface"
 
-const paths = [{
+const paths: IRoute[] = [{
   'path': '/dashbord',
-  'name': 'Dashbord',
-  'component': Dashbord,
-  'show': true
+  'meta': { 'title': '导航1' },
+  'show': true,
+  'children': [{
+    'path': '/dashbord/a',
+    'show': true,
+    'meta': { 'title': '导航1-1' },
+    'children': [{
+      'path': '/dashbord/a/b',
+      'show': false,
+      'meta': { 'title': '导航1-1-1' },
+      'children': [{
+        'path': '/dashbord/a/b/c',
+        'component': 'List',
+        'show': true,
+        'children': [],
+        'meta': { 'title': '导航1-1-1-1' },
+      }, {
+        'path': '/dashbord/a/b/d',
+        'component': 'Todo',
+        'show': true,
+        'meta': { 'title': '导航1-1-1-2' },
+      }]
+    }]
+  }, {
+    'path': '/dashbord/e',
+    'component': 'Todo',
+    'show': true,
+    'meta': { 'title': '导航1-2' },
+  }]
 }, {
   'path': '/',
-  'name': 'Login',
-  'component': Login,
-  'show': true
+  'component': 'Login',
+  'show': true,
+  'meta': { 'title': '导航2' },
 }, {
   'path': '/list',
-  'name': 'List',
-  'component': List,
-  'show': true
+  'component': 'List',
+  'show': true,
+  'meta': { 'title': '导航3' },
 }, {
   'path': '/todo',
-  'name': 'Todo',
-  'component': Todo,
-  'show': true
+  'component': 'Todo',
+  'show': false,
+  'meta': { 'title': '导航4' },
 }]
 
 export default paths

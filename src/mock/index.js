@@ -1,11 +1,13 @@
 import Mock from 'mockjs'
 import user from './mockmodules/user'
+import globals from './mockmodules/globals'
 
 const moduleLists = [
-  ...user
+  ...user,
+  ...globals
 ]
 
 moduleLists.forEach((item) => {
   const { url, type, response } = item
-  Mock.mock(url, type, response)
+  Mock.mock(new RegExp(url), type, response)
 })

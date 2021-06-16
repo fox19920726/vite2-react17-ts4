@@ -1,6 +1,5 @@
 import React, { useState, FC } from 'react'
 import Form from './indexUi'
-// import { IState } from '@/types/todoInterface'
 
 const Todo: FC = () => {
 

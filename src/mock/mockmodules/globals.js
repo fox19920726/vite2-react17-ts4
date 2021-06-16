@@ -6,8 +6,30 @@ const list = Mock.mock({
     userName: '@cname',
     'type|0-100': 100 
   }],
-  'errmsg': '成功',
-  'errno': 0
+  'msg': '成功',
+  'code': 200
+})
+
+const asyncRoutes = Mock.mock({
+  'rows': [{
+    'path': '/asyncTodo',
+    'component': 'Todo',
+    'show': true,
+    'meta': { 'title': '异步导航5' },
+    'children': [{
+      'path': '/asyncTodo/a',
+      'component': 'Login',
+      'show': true,
+      'meta': { 'title': '异步导航5-1' },
+    }]
+  }, {
+    'path': '/asyncList',
+    'component': 'List',
+    'show': true,
+    'meta': { 'title': '异步导航6' },
+  }],
+  'msg': '成功',
+  'code': 200
 })
 
 const globals = [
@@ -21,6 +43,10 @@ const globals = [
     'url': '/list',
     'type': 'get',
     'response': () => list
+  }, {
+    'url': '/getAsyncRoutes',
+    'type': 'get',
+    'response': () => asyncRoutes
   }
 ];
 

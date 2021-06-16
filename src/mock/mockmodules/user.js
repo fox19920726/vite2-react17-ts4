@@ -11,8 +11,19 @@ const info = {
   'code': 200
 }
 
+const login = {
+  'data': {},
+  'msg': '成功',
+  'code': 200
+}
+
 
 const user = [
+  {
+    'url': '/login',
+    'type': 'post',
+    'response': login
+  },
   {
     'url': '/user/info',
     'type': 'get',

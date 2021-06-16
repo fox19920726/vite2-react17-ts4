@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "lint": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx src"
+    "lint": "eslint --fix --quiet --ext .js,.jsx,.ts,.tsx src",
+    "prepare": "husky install"
   },
   "dependencies": {
     "antd": "^4.13.0",
@@ -29,7 +30,7 @@
     "eslint": "^7.20.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^5.1.1",
+    "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "mockjs": "^1.1.0",
     "rollup-plugin-eslint": "^7.0.0",
@@ -39,7 +40,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {

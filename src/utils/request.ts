@@ -9,28 +9,11 @@ const service = axios.create({
   timeout: 10000
 })
 
-const cancelFunc: { [key: string]: () => void } = {}
-const cancelCheckUrlList: string[] = []
-const noAuthorizationUrls: string[] = []
-
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const token = getToken()
 
-    if (token) {
-      if (!noAuthorizationUrls.includes(config.url)) {
-        config.headers['X-Token'] = token
-      }
-    }
-
-    if (cancelCheckUrlList.indexOf(config.url) !== -1) {
-      config.cancelToken = new axios.CancelToken((c) => {
-        if (typeof cancelFunc[config.url] === 'function') {
-          cancelFunc[config.url]()
-        }
-        cancelFunc[config.url] = c
-      })
-    }
+    token && (config.headers['X-Token'] = token)
 
     return config
   },
@@ -43,9 +26,6 @@ service.interceptors.request.use(
 // 访问接口成功后的code码需要全公司统一，用来统一处理每个code对应的策略
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    if (typeof cancelFunc[response.config.url] === 'function') {
-      delete cancelFunc[response.config.url]
-    }
     // 访问接口成功后的code码需要全公司统一，用来统一处理每个code对应的策略
     const { code } = response.data
     if (code && code !== 200) {
@@ -54,7 +34,7 @@ service.interceptors.response.use(
         removeToken()
       }
       console.log('error')
-      return Promise.reject(new Error(response.data.msg || response.message || 'Error'))
+      return Promise.reject(new Error(response.data.msg || 'Error'))
     }
     return response
   },

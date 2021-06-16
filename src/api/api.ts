@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 import { IData, IUserInfo } from '@/types/userInterface'
+import { IAsyncRoute } from '@/types/menuInterface'
 
 // AxiosResponse
 
@@ -23,10 +24,11 @@ export function login(name: string, password: string): Promise<IData> {
   })
 }
 
-// 系统版本号
-export function versionList(): Promise<IData> {
-  return request<IData>({
-    url: '/version/list',
+// 获取异步路由
+
+export function getAsyncRoutes(): Promise<IAsyncRoute> {
+  return request<IAsyncRoute>({
+    url: '/getAsyncRoutes',
     method: 'get'
   })
 }
