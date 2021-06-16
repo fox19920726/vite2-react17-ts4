@@ -27,7 +27,7 @@ function setSider(paths: IRoute[]) {
         return (
           // title要点击的话就title={<Link to={path}>{title}</Link>}
           <SubMenu key={path} title={title}>
-            { setSider(children) }
+            {setSider(children)}
           </SubMenu>
         )
       }
@@ -84,10 +84,10 @@ const NavBar: FC = () => {
         defaultOpenKeys={['sub1']}
         mode="inline"
       >
-        { setSider(paths) }
+        {setSider(paths)}
       </Menu>
       <Switch>
-        { setRoute(paths) }
+        {setRoute(paths)}
       </Switch>
     </>
   )

@@ -10,9 +10,9 @@ const history = createHashHistory()
 
 const RootApp = () => {
 	return (
-		<Router history={history}>
-			<App />
-		</Router>
+  <Router history={history}>
+    <App />
+  </Router>
 	)
 }
 

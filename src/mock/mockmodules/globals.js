@@ -20,13 +20,13 @@ const asyncRoutes = Mock.mock({
       'path': '/asyncTodo/a',
       'component': 'Login',
       'show': true,
-      'meta': { 'title': '异步导航5-1' },
+      'meta': { 'title': '异步导航5-1' }
     }]
   }, {
     'path': '/asyncList',
     'component': 'List',
     'show': true,
-    'meta': { 'title': '异步导航6' },
+    'meta': { 'title': '异步导航6' }
   }],
   'msg': '成功',
   'code': 200
