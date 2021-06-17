@@ -6,7 +6,7 @@ export interface IMeta {
 }
 
 /*
-* 当该menu为目录的时候不需要component
+* 当该menu为 目录的时候不需要component
 * 当该路由下没有子路由的时候不需要children
 */
 export interface IRoute {
