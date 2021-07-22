@@ -5,6 +5,8 @@ import { loginReducer } from './reducer/reducer'
 import { userEnterName, userLogin, userSuccess } from './reducer/action'
 import { login } from '@/api/api'
 import { ILogin } from '@/types/userInterface'
+import './login.scss'
+// import a from './images/logo.png'
 
 const initState: ILogin = {
   name: '',
@@ -45,6 +47,7 @@ const Login: FC = () => {
 
   return ( 
     <>
+      <img src="/images/logo.png" alt="" />
       <p>{isLoading ? '登录中...' : ''}</p>
       <p>{isLoggedIn ? '您已登录' : '请登录'}</p>
       <input

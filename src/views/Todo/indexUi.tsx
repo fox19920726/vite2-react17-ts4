@@ -18,18 +18,24 @@ const Form: FC<Props> = (props) => {
     console.log('正在查询...')
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-
+  /* 
+  * 这里写HTMLInputElement | HTMLSelectElement的原因是
+  * name是输入的，type是选择的，他们用的同一个方法，为了两者都支持，所以....
+  */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+    const { name, value } = e.currentTarget
     setForm({
       ...form,
       [name]: value
     })
   }
-
-  const handleBlur = (e) => {
-    const { value } = e.target
-    if(e.keyCode === 13) {
+  /* 
+  * 这里keyCode被deprecated了...
+  * 只好用key判断字符串了
+  */
+  const handleBlur = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    const { value } = e.currentTarget
+    if(e.key === 'ENTER') {
       props.filterName(value)
     }
   }
@@ -59,7 +65,7 @@ const Form: FC<Props> = (props) => {
 }
 
 Form.propTypes = {
-  filterName: PropTypes.func
+  filterName: PropTypes.func.isRequired
 }
 
 export default Form

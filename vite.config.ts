@@ -2,16 +2,19 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import legacy from '@vitejs/plugin-legacy'
+import gzipPlugin from 'rollup-plugin-gzip'
 // import { mocks } from './src/plugins/index'
-// import { eslint } from 'rollup-plugin-eslint'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     host: '0.0.0.0'
   },
+  // 静态文件目录
+  publicDir: 'src/static',
   plugins: [
     reactRefresh(),
+    gzipPlugin(),
     legacy({
       targets: [
         'last 1 version',
@@ -34,6 +37,15 @@ export default defineConfig({
     //   enforce: 'pre'
     // }
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'js/[name].[hash].js',
+        chunkFileNames: 'js/[name].[hash].js',
+        assetFileNames: 'css/[name].[hash].[ext]'
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')

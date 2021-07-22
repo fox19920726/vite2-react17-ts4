@@ -17,26 +17,16 @@ export interface IUserState {
 	payload: IUserInfo
 }
 
+export interface ILogin {
+	name?: string
+	pwd?: string
+	isLoading?: boolean
+	error?: string
+	isLoggedIn?: boolean
+}
+
 export interface ILoginState {
 	type: string
 	payload?: ILogin
 }
-
-export interface ILogin {
-	name?: string
-	pwd?: string
-  isLoading?: boolean
-  error?: string
-  isLoggedIn?: boolean
-}
-
-export interface IUserName {
-	name: string
-}
-
-export interface IUserNameState {
-	type: string
-	payload?: IUserName
-}
-
 // export type T1<T extends string> = T extends string ? { [K in T] : string } : never

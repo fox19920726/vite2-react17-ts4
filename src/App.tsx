@@ -1,11 +1,15 @@
 import React, { FC, useReducer, useEffect } from 'react'
+import { Router } from 'react-router-dom'
+import { createHashHistory } from 'history'
 import 'antd/dist/antd.css'
 import '@/styles/App.scss'
 import { getToken } from '@/utils/cookie'
 import UserContext from '@/contexts/userContext'
 import NavBar from '@/views/Layout/nav'
 import { getUserInfo } from '@/api/api'
-import { IUserInfo, IUserState, IData } from '@/types/userInterface'
+import { IUserInfo, IUserState } from '@/types/userInterface'
+
+const history = createHashHistory()
 
 const user: IUserInfo = {
   roleId: 0,
@@ -50,9 +54,11 @@ const App: FC = () => {
 
   return (
     <UserContext.Provider value={{ state, handleInfo }}>
-      <div className="app">
-        <NavBar />
-      </div>
+      <Router history={history}>
+        <div className="app">
+          <NavBar />
+        </div>
+      </Router>
     </UserContext.Provider>
   )
 }

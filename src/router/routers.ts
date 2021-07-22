@@ -37,7 +37,7 @@ const paths: IRoute[] = [{
     'meta': { 'title': '导航1-2' }
   }]
 }, {
-  'path': '/',
+  'path': '/Login',
   'component': 'Login',
   'show': true,
   'meta': { 'title': '导航2' }

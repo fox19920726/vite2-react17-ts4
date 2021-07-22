@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 const TokenKey = 'x-token'
 
 export function getToken(): string {
-  return Cookies.get(TokenKey)
+  return Cookies.get(TokenKey) || ''
 }
 
 export function setToken(token: string): void {
