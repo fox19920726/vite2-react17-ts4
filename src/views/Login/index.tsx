@@ -31,11 +31,12 @@ const Login: FC = () => {
     const { code, data: { token }  } = await login(name, pwd)
 
     if (code === 200) {
+      console.log('token1111:', token)
+      // 登陆成功后设置token,跳转到要跳转的页面
       dispatch(userSuccess())
       setToken(token)
-      return
+      history.push('/dashbord')
     }
-    history.push('/dashbord')
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import '@/styles/App.scss'
 import { getToken } from '@/utils/cookie'
 import UserContext from '@/contexts/userContext'
-import NavBar from '@/views/Layout/nav'
+import Layout from '@/views/Layout'
 import { getUserInfo } from '@/api/api'
 import { IUserInfo, IUserState } from '@/types/userInterface'
 
@@ -14,7 +14,7 @@ const history = createHashHistory()
 const user: IUserInfo = {
   roleId: 0,
   roleName: '',
-  token: '',
+  token: getToken(),
   userId: 0,
   userName: ''
 }
@@ -34,7 +34,6 @@ function userInfoReducer(state: IUserInfo, action: IUserState): IUserInfo {
 }
 
 const App: FC = () => {
-
   const [state, dispatch] = useReducer(userInfoReducer, user)
 
   const handleInfo = async (): Promise<void> => {
@@ -46,17 +45,14 @@ const App: FC = () => {
   }
 
   useEffect(() => {
-
     handleInfo()
-
   }, [])
-  
 
   return (
     <UserContext.Provider value={{ state, handleInfo }}>
       <Router history={history}>
         <div className="app">
-          <NavBar />
+          <Layout />
         </div>
       </Router>
     </UserContext.Provider>

@@ -11,11 +11,7 @@ const info = {
   'code': 200
 }
 
-const login = {
-  'data': {},
-  'msg': '成功',
-  'code': 200
-}
+const login = { ...info }
 
 
 const user = [
