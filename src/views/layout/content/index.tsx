@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { Layout } from 'antd'
 import { Switch, Route } from 'react-router-dom'
-import useRouteList from '@/hooks/getRoutes'
+import UserContext from '@/contexts/userContext'
 import { IRoute } from '@/types/menuInterface'
 import components from '@/router/components'
 import './index.scss'
@@ -21,7 +21,7 @@ function setRoute(paths: IRoute[]): any {
 }
 
 const LayoutContent: FC = () => {
-  const paths = useRouteList()
+  const { paths } = useContext(UserContext)
   return (
     <Layout>
       <Content className="content">

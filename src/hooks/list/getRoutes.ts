@@ -23,7 +23,7 @@ function useRouteList() {
   useEffect(() => {
     handleAsyncRoutes()
   }, [])
-  return paths
+  return [paths, handleAsyncRoutes]
 }
 
 export default useRouteList

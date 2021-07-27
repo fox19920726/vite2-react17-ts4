@@ -8,11 +8,12 @@ import Sider from './sider'
 import Content from './content'
 
 const LayoutMain: FC = () => {
-  const { state: { token } } = useContext(UserContext)
+  const { userInfo: { token } } = useContext(UserContext)
 
   return (
     <HashRouter>
       <Switch>
+        {/* /logon路由是不会带导航等公共组件的。/aaa/login这样才能匹配到带公用组件的路由 */}
         <Route exact path="/login" component={Login} />
         <Route
           path="/"

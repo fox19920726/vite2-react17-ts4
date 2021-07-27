@@ -1,7 +1,7 @@
-import React,  { FC } from 'react'
+import React,  { FC, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import UserContext from '@/contexts/userContext'
 import { IRoute } from '@/types/menuInterface'
-import useRouteList from '@/hooks/getRoutes'
 import './index.scss'
 import { Menu, Layout } from 'antd'
 
@@ -39,7 +39,7 @@ function setSider(paths: IRoute[]) {
 }
 
 const LayoutSider: FC = () => {
-  const paths = useRouteList()
+  const { paths } = useContext(UserContext)
 
   return (
     <Sider className="site-layout-background">
