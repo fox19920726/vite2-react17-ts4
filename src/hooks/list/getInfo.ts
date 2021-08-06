@@ -25,7 +25,7 @@ function userInfoReducer(state: IUserInfo, action: IUserState): IUserInfo {
   }
 }
 
-function useUserInfo() {
+function useUserInfo(): any[] {
   const [state, dispatch] = useReducer(userInfoReducer, user)
 
   const handleInfo = async (): Promise<void> => {

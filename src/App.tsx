@@ -5,16 +5,15 @@ import 'antd/dist/antd.css'
 import '@/styles/App.scss'
 import UserContext from '@/contexts/userContext'
 import Layout from '@/views/Layout'
-import { useRouteList, useUserInfo } from './hooks'
+import { useUserInfo } from './hooks'
 
 const history = createHashHistory()
 
 const App: FC = () => {
   const [userInfo, handleInfo] = useUserInfo()
-  const [paths, handleAsyncRoutes] = useRouteList()
 
   return (
-    <UserContext.Provider value={{ userInfo, handleInfo, paths, handleAsyncRoutes }}>
+    <UserContext.Provider value={{ userInfo, handleInfo }}>
       <Router history={history}>
         <div className="app">
           <Layout />

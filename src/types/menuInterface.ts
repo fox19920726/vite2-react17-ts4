@@ -29,7 +29,12 @@ export interface IAsyncRoute {
 	code: number
 }
 
-// 路由switch递归方法
+// 路由hook
+export interface ITagViewState {
+	type: string
+	payload: IRoute
+}
+
 // export interface ISetRoute {
 	
 // }

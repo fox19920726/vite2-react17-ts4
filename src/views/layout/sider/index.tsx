@@ -1,6 +1,6 @@
 import React,  { FC, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import UserContext from '@/contexts/userContext'
+import RouteContext from '@/contexts/routeContext'
 import { IRoute } from '@/types/menuInterface'
 import './index.scss'
 import { Menu, Layout } from 'antd'
@@ -8,9 +8,22 @@ import { Menu, Layout } from 'antd'
 const { SubMenu } = Menu
 const { Sider } = Layout
 
-const handleClick = (e: React.Attributes): void => {
-  console.log('click ', e);
+function findTag(paths: IRoute[], currentTagPath: string, tags: IRoute[]): IRoute {
+  let curt: IRoute | Record<string, unknown> = {}
+  paths.forEach((i: IRoute) => {
+    const { path, children } = i
+    const pathArr = tags.map((ci: IRoute) => ci.path)
+
+    if (path === currentTagPath && pathArr.indexOf(path) < 0) {
+      curt = { ...i }
+    }
+    if (children && children?.length > 0) {
+      findTag(children, currentTagPath, tags)
+    }
+  })
+  return curt as IRoute
 }
+
 
 /*
 * 如果该菜单设置显示，并且他只有一个子路由
@@ -39,7 +52,14 @@ function setSider(paths: IRoute[]) {
 }
 
 const LayoutSider: FC = () => {
-  const { paths } = useContext(UserContext)
+  const { paths, tags, handleAddTag } = useContext(RouteContext)
+
+  const handleClick = (e: React.Attributes): void => {
+    const [currentTagPath] = e.keyPath
+    const currentTag = findTag(paths, currentTagPath, tags)
+
+    currentTag && handleAddTag(currentTag)
+  }
 
   return (
     <Sider className="site-layout-background">

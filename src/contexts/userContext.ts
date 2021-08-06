@@ -1,6 +1,5 @@
 import React from 'react'
 import { IUserInfo } from '@/types/userInterface'
-import { IRoute } from '@/types/menuInterface'
 
 const userInfo:IUserInfo = {
   roleId: 0,
@@ -9,11 +8,9 @@ const userInfo:IUserInfo = {
   userId: 0,
   userName: ''
 }
-const paths: IRoute[] = []
 
 const handleInfo = ():void => {}
-const handleAsyncRoutes = ():void => {}
 
-const UserContext = React.createContext({ userInfo, handleInfo, paths, handleAsyncRoutes })
+const UserContext = React.createContext({ userInfo, handleInfo })
 
 export default UserContext

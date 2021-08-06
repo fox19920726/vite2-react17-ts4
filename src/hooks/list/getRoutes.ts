@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { message } from 'antd'
+import { message } from 'antd' 
 import { getAsyncRoutes } from '@/api/api'
 import routes from '@/router/routers' 
 
-function useRouteList() {
+function useRouteList(): any[] {
   const [paths, setPath] = useState(routes)
   const handleAsyncRoutes = async (): Promise<void> => {
-    console.log(44)
     const { rows, code, msg } = await getAsyncRoutes()
   
     if (code === 200) {
