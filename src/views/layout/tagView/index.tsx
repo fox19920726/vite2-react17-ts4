@@ -6,7 +6,7 @@ import { IRoute } from '@/types/menuInterface'
 
 const TagView: FC = () => {
   const history = useHistory()
-  const { tags: { activeTag, deleteItem, tagList }, handleTag: { handleRemoveTag } } = useContext(RouteContext)
+  const { tags, handleTag: { handleRemoveTag } } = useContext(RouteContext)
 
   const handleClick = (i: IRoute) => {
     history.replace(i.path)
@@ -17,13 +17,13 @@ const TagView: FC = () => {
   }
 
   useEffect(() => {
-    tagList.length && history.replace(tagList[tagList.length - 1].path)
-  }, [tagList])
+    tags.length && history.replace(tags[tags.length - 1].path)
+  }, [tags])
 
   return (
     <>
       {
-        tagList.map((i, index) => {
+        tags.map((i, index) => {
           return (
             <Tag
               key={i.path}

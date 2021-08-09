@@ -1,13 +1,9 @@
 import React, { useReducer } from 'react'
-import { IRoute, ITagView, ITagViewAction } from '@/types/menuInterface'
+import { IRoute, ITagView } from '@/types/menuInterface'
 import { tagViewReducer } from './reducer/reducer'
 import { addTag, removeTag } from './reducer/action'
 
-const tagView: ITagViewAction = {
-  activeTag: {} as IRoute,
-  deleteItem: {} as IRoute,
-  tagList: [] as IRoute[]
-}
+const tagView = [] as IRoute[]
 
 function useTagView(): any[] {
   const [tags, dispatch] = useReducer(tagViewReducer, tagView)
