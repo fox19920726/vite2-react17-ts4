@@ -9,7 +9,7 @@ const { SubMenu } = Menu
 const { Sider } = Layout
 
 function findTag(paths: IRoute[], currentTagPath: string, tags: IRoute[]): IRoute {
-  let curt: IRoute | Record<string, unknown> = {}
+  let curt = {} as IRoute
   paths.forEach((i: IRoute) => {
     const { path, children } = i
     const pathArr = tags.map((ci: IRoute) => ci.path)
@@ -21,7 +21,7 @@ function findTag(paths: IRoute[], currentTagPath: string, tags: IRoute[]): IRout
       findTag(children, currentTagPath, tags)
     }
   })
-  return curt as IRoute
+  return curt
 }
 
 
