@@ -14,7 +14,7 @@ import TagView from './tagView'
 const LayoutMain: FC = () => {
   const { userInfo: { token } } = useContext(UserContext)
   const [paths, handleAsyncRoutes] = useRouteList()
-  const [tags, handleAddTag, handleRemoveTag] = useTagView()
+  const [tags, handleTag] = useTagView()
 
   return (
     <HashRouter>
@@ -31,7 +31,7 @@ const LayoutMain: FC = () => {
               <Layout>
                 <Header />
                 <Layout>
-                  <RouteContex.Provider value={{ paths, handleAsyncRoutes, tags, handleAddTag, handleRemoveTag }}>
+                  <RouteContex.Provider value={{ paths, handleAsyncRoutes, ...{ tags, handleTag } }}>
                     <Sider />
                     <Layout>
                       <TagView />

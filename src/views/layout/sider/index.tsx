@@ -1,18 +1,18 @@
 import React,  { FC, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import RouteContext from '@/contexts/routeContext'
-import { IRoute } from '@/types/menuInterface'
+import { IRoute, ITagViewAction } from '@/types/menuInterface'
 import './index.scss'
 import { Menu, Layout } from 'antd'
 
 const { SubMenu } = Menu
 const { Sider } = Layout
 
-function findTag(paths: IRoute[], currentTagPath: string, tags: IRoute[]): IRoute {
+function findTag(paths: IRoute[], currentTagPath: string, tags: ITagViewAction): IRoute {
   let curt = {} as IRoute
   paths.forEach((i: IRoute) => {
     const { path, children } = i
-    const pathArr = tags.map((ci: IRoute) => ci.path)
+    const pathArr = tags.tagList.map((ci: IRoute) => ci.path)
 
     if (path === currentTagPath && pathArr.indexOf(path) < 0) {
       curt = { ...i }
@@ -52,13 +52,11 @@ function setSider(paths: IRoute[]) {
 }
 
 const LayoutSider: FC = () => {
-  const { paths, tags, handleAddTag } = useContext(RouteContext)
+  const { paths, tags, handleTag: { handleAddTag } } = useContext(RouteContext)
 
-  const handleClick = (e: React.Attributes): void => {
-    const [currentTagPath] = e.keyPath
+  const handleClick = ({ keyPath: [currentTagPath] }): void => {
     const currentTag = findTag(paths, currentTagPath, tags)
-
-    currentTag && handleAddTag(currentTag)
+    Object.keys(currentTag).length && handleAddTag(currentTag)
   }
 
   return (

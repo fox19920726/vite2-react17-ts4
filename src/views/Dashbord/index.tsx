@@ -6,6 +6,10 @@ const Dashbord: FC = () => {
   // 如果我们想要有条件地执行一个 effect，可以将判断放到 Hook 的内部
   // React 保证了每次运行 effect 的同时，DOM 都已经更新完毕。
 
+  const handleClick = () => {
+    setCount(count + 1)
+  }
+
   useEffect(() => {
     // 组件被卸载的时候执行
     return () => {
@@ -17,14 +21,14 @@ const Dashbord: FC = () => {
   // hook的执行是有顺序的
   useEffect(() => {
     console.log(1)
-  })
+  }, [])
 
   return (
     <div>
       <p>
         You clicked {count} times
       </p>
-      <button onClick={() => setCount(count + 1)}>
+      <button onClick={handleClick}>
         Click me
       </button>
     </div>
