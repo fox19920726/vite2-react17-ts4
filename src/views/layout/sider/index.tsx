@@ -1,29 +1,9 @@
 import React,  { FC, useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import RouteContext from '@/contexts/routeContext'
-import { IRoute } from '@/types/menuInterface'
+import { IRoute, ITagViewAction } from '@/types/menuInterface'
 import './index.scss'
 import { Menu, Layout } from 'antd'
-
-const { SubMenu } = Menu
-const { Sider } = Layout
-
-function findTag(paths: IRoute[], currentTagPath: string, tags: IRoute[]): IRoute {
-  let curt = {} as IRoute
-  paths.forEach((i: IRoute) => {
-    const { path, children } = i
-    const pathArr = tags.map((ci: IRoute) => ci.path)
-
-    if (path === currentTagPath && pathArr.indexOf(path) < 0) {
-      curt = { ...i }
-    }
-    if (children && children?.length > 0) {
-      findTag(children, currentTagPath, tags)
-    }
-  })
-  return curt
-}
-
 
 /*
 * 如果该菜单设置显示，并且他只有一个子路由
@@ -37,9 +17,9 @@ function setSider(paths: IRoute[]) {
       if(children?.length && show){
         return (
           // title要点击的话就title={<Link to={path}>{title}</Link>}
-          <SubMenu key={path} title={title}>
+          <Menu.SubMenu key={path} title={title}>
             {setSider(children)}
-          </SubMenu>
+          </Menu.SubMenu>
         )
       }
       return (
@@ -52,27 +32,58 @@ function setSider(paths: IRoute[]) {
 }
 
 const LayoutSider: FC = () => {
-  const [state, setState] = useState('/')
-  const { paths, tags, handleTag: { handleAddTag } } = useContext(RouteContext)
+  const {
+    paths,
+    tags: { activeTag, tagList },
+    handleTag: { handleAddTag, handleSetActive }
+  } = useContext(RouteContext)
 
-  const handleClick = ({ keyPath }): void => {
-    const [currentTagPath] = keyPath
-    const currentTag = findTag(paths, currentTagPath, tags)
-    Object.keys(currentTag).length && handleAddTag(currentTag)
-    setState(currentTagPath)
+  const findTag = (paths: IRoute[], currentTagPath: string, tagList: IRoute[]): IRoute => {
+    let curt = {} as IRoute
+    paths.forEach((i: IRoute) => {
+      const { path, children } = i
+      const pathArr = tagList.map((ci: IRoute) => ci.path)
+  
+      if (path === currentTagPath) {
+        curt = { ...i }
+        pathArr.indexOf(path) < 0 && handleAddTag(curt)
+      }
+      if (children && children?.length > 0) {
+        findTag(children, currentTagPath, tagList)
+      }
+    })
+    return curt
   }
 
+  const handleClick = ({ keyPath: [currentTagPath] }: { keyPath: string[]}): void => {
+    const currentTag = findTag(paths, currentTagPath, tagList)
+
+    handleSetActive(currentTag)
+  }
+
+  useEffect(() => {
+    /* 
+    * 初始化操作：设置activeTag, 并推入tagView数组
+    * 默认active的tag为dashboard组件
+    * 这里这样初始化tagView其实不太好，很死板
+    * 因为如果配的第一个菜单不是dashboard组件就尴尬了
+    */
+    const route = paths[0]
+    handleSetActive(route)
+    handleAddTag(route)
+  }, [])
+
   return (
-    <Sider className="site-layout-background">
+    <Layout.Sider className="site-layout-background">
       <Menu
         onClick={handleClick}
-        defaultSelectedKeys={[state]}
-        selectedKeys={[state]}
+        defaultSelectedKeys={[activeTag?.path || '/']}
+        selectedKeys={[activeTag?.path || '/']}
         mode="inline"
       >
         {setSider(paths)}
       </Menu>
-    </Sider>
+    </Layout.Sider>
   )
 }
 

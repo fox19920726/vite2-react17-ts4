@@ -1,9 +1,13 @@
 import React, { useReducer } from 'react'
-import { IRoute, ITagView } from '@/types/menuInterface'
+import { IRoute, ITagView, ITagViewAction } from '@/types/menuInterface'
 import { tagViewReducer } from './reducer/reducer'
-import { addTag, removeTag } from './reducer/action'
+import { addTag, removeTag, setActive, setDelete } from './reducer/action'
 
-const tagView = [] as IRoute[]
+const tagView: ITagViewAction = {
+  activeTag: {} as IRoute,
+  deleteItem: {} as IRoute,
+  tagList: [] as IRoute[]
+}
 
 function useTagView(): any[] {
   const [tags, dispatch] = useReducer(tagViewReducer, tagView)
@@ -16,6 +20,14 @@ function useTagView(): any[] {
     dispatch(removeTag(route))
   }
 
-  return [tags, { handleAddTag, handleRemoveTag }]
+  const handleSetActive = (route: IRoute): void => {
+    dispatch(setActive(route))
+  }
+
+  const handleSetDelete = (route: IRoute): void => {
+    dispatch(setDelete(route))
+  }
+
+  return [tags, { handleAddTag, handleRemoveTag, handleSetActive, handleSetDelete }]
 } 
 export default useTagView

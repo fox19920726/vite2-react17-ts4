@@ -1,0 +1,28 @@
+.ant-tag{
+  cursor: pointer;
+  line-height: 26px;
+  border-color: #dcdfe6;
+  font-size: 14px;
+}
+.ant-tag-processing{
+  background: #18a9ea;
+  color: #fff;
+  border-color: #18a9ea;
+  .ant-tag-close-icon{
+    color: #fff;
+  }
+  &::before{
+    content: "";
+    background: #fff;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 6px;
+  }
+}
+.tagview-container{
+  padding: 10px;
+  background: #fff;
+}

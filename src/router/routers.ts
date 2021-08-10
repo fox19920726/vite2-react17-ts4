@@ -5,7 +5,16 @@
 
 import { IRoute } from '@/types/menuInterface'
 
+/* 
+* show设置为false，在菜单里是看不到的
+* 但是我路由设计的时候还是渲染了的，所以通过地址栏输入是可以访问该路由的
+*/
 const paths: IRoute[] = [{
+  'path': '/',
+  'component': 'Dashbord',
+  'show': false,
+  'meta': { 'title': '主页面' }
+}, {
   'path': '/multy',
   'meta': { 'title': '导航1' },
   'show': true,
@@ -36,16 +45,6 @@ const paths: IRoute[] = [{
     'show': true,
     'meta': { 'title': '导航1-2' }
   }]
-}, {
-  'path': '/',
-  'component': 'Dashbord',
-  'show': true,
-  'meta': { 'title': '主页面' }
-}, {
-  'path': '/dashbord',
-  'component': 'Dashbord',
-  'show': true,
-  'meta': { 'title': '主页面' }
 }, {
   'path': '/gologin',
   'component': 'Login',

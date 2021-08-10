@@ -12,10 +12,10 @@ function setRoute(paths: IRoute[]): any {
   return (
     paths.map((item) => {
       const { children, path, component, show } = item
-      if(children?.length && show){
+      if(children?.length){
         return setRoute(children)
       }
-      return show && component && <Route exact path={path} key={path} component={components[component]} />
+      return component && <Route exact path={path} key={path} component={components[component]} />
     })
   )
 }

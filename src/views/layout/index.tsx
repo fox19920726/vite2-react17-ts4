@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import UserContext from '@/contexts/userContext'
 import RouteContex from '@/contexts/routeContext';
 import { useRouteList, useTagView } from '@/hooks'
+import './index.scss'
 
 import { Layout } from 'antd'
 import Login from '@/views/Login'

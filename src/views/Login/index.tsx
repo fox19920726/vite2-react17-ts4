@@ -5,7 +5,7 @@ import { loginReducer } from './reducer/reducer'
 import { userEnterName, userLogin, userSuccess } from './reducer/action'
 import { login } from '@/api/api'
 import { ILogin } from '@/types/userInterface'
-import './login.scss'
+import './index.scss'
 // import a from './images/logo.png'
 
 const initState: ILogin = {
