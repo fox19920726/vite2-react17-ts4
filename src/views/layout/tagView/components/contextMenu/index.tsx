@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 import RouteContext from '@/contexts/routeContext'
-import { IRoute, ITagMenu } from '@/types/menuInterface'
+import { ITagMenu } from '@/types/menuInterface'
 import './index.scss'
 import { useHistory } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ const ContextMenu: FC<ITagMenu> = (props) => {
   const { left, top, item } = props
   const history = useHistory()
   const {
-    tags: { activeTag, deleteItem, menuItem, tagList },
+    tags: { tagList },
     handleTag: { handleSetActive, handleRemoveOtherTags, handleRemoveAllTags }
   } = useContext(RouteContext)
 
