@@ -2,10 +2,13 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   SET_ACTIVE,
-  SET_DELETE
+  SET_DELETE,
+  SET_MENU_ITEM,
+  REMOVE_OTHER_TAGS,
+  REMOVE_ALL_TAGS
 } from './types'
 
-import { ITagViewState, ITagViewAction, IRoute } from '@/types/menuInterface'
+import { ITagViewState, IRoute } from '@/types/menuInterface'
 
 export const addTag = (route: IRoute): ITagViewState => ({
   type: ADD_TAG,
@@ -36,5 +39,28 @@ export const setDelete = (route: IRoute): ITagViewState => ({
   payload: {
     deleteItem: route,
     tagList: [route]
+  }
+})
+
+export const setMenuItem = (route: IRoute): ITagViewState => ({
+  type: SET_MENU_ITEM,
+  payload: {
+    menuItem: route,
+    tagList: []
+  }
+})
+
+export const removeOtherTags = (route: IRoute): ITagViewState => ({
+  type: REMOVE_OTHER_TAGS,
+  payload: {
+    menuItem: route,
+    tagList: []
+  }
+})
+
+export const removeAllTags = (): ITagViewState => ({
+  type: REMOVE_ALL_TAGS,
+  payload: {
+    tagList: []
   }
 })

@@ -10,6 +10,16 @@ export default defineConfig({
   server: {
     host: '0.0.0.0'
   },
+  // css: {
+  //   preprocessorOptions: {
+  //     // less: {
+  //     //   javascriptEnabled: true,
+  //     // }
+  //     scss: {
+  //       additionalData: `$injectedColor: orange;`
+  //     }
+  //   }
+  // },
   // 静态文件目录
   publicDir: 'src/static',
   plugins: [

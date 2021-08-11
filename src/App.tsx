@@ -4,7 +4,7 @@ import { createHashHistory } from 'history'
 import 'antd/dist/antd.css'
 import '@/styles/App.scss'
 import UserContext from '@/contexts/userContext'
-import Layout from '@/views/Layout'
+import LayoutMain from '@/views/Layout'
 import { useUserInfo } from './hooks'
 
 const history = createHashHistory()
@@ -16,7 +16,7 @@ const App: FC = () => {
     <UserContext.Provider value={{ userInfo, handleInfo }}>
       <Router history={history}>
         <div className="app">
-          <Layout />
+          <LayoutMain />
         </div>
       </Router>
     </UserContext.Provider>

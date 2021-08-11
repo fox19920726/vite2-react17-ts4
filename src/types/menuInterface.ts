@@ -34,12 +34,16 @@ export interface ITagViewFn {
 	handleRemoveTag: (i: IRoute) => void
 	handleSetActive: (i: IRoute) => void
 	handleSetDelete: (i: IRoute) => void
+  handleSetMenuItem: (i: IRoute) => void
+  handleRemoveOtherTags: (i: IRoute) => void
+  handleRemoveAllTags: () => void
 }
 
 // tagView action
 export interface ITagViewAction {
-  activeTag?: IRoute,
-  deleteItem?: IRoute,
+  activeTag?: IRoute
+  deleteItem?: IRoute
+  menuItem?: IRoute
   tagList: IRoute[]
 }
 
@@ -55,6 +59,9 @@ export interface ITagViewState {
 	payload: ITagViewAction
 }
 
-// export interface ISetRoute {
-	
-// }
+// 右键tagview
+export interface ITagMenu {
+  left: number
+  top: number
+  item: IRoute
+}

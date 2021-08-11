@@ -106,6 +106,7 @@
     "eqeqeq": 2, // 必须用===
     "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
     "react-hooks/exhaustive-deps": "warn", // 检查 effect 的依赖
-    "@typescript-eslint/no-empty-function": 0
+    "@typescript-eslint/no-empty-function": 0,
+    "react/prop-types": 0 
   }
 }

@@ -7,9 +7,9 @@ import './index.scss'
 
 import { Layout } from 'antd'
 import Login from '@/views/Login'
-import Header from './header'
-import Sider from './sider'
-import Content from './content'
+import LayoutHeader from './header'
+import LayoutSider from './sider'
+import LayoutContent from './content'
 import TagView from './tagView'
 
 const LayoutMain: FC = () => {
@@ -30,13 +30,13 @@ const LayoutMain: FC = () => {
             }
             return (
               <Layout>
-                <Header />
+                <LayoutHeader />
                 <Layout>
                   <RouteContex.Provider value={{ paths, handleAsyncRoutes, ...{ tags, handleTag } }}>
-                    <Sider />
+                    <LayoutSider />
                     <Layout>
                       <TagView />
-                      <Content />
+                      <LayoutContent />
                     </Layout>
                   </RouteContex.Provider>
                 </Layout>

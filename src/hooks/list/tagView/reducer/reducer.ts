@@ -2,14 +2,17 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   SET_ACTIVE,
-  SET_DELETE
+  SET_DELETE,
+  SET_MENU_ITEM,
+  REMOVE_OTHER_TAGS,
+  REMOVE_ALL_TAGS
 } from './types'
 
-import { IRoute, ITagViewState, ITagViewAction } from '@/types/menuInterface'
+import { ITagViewState, ITagViewAction } from '@/types/menuInterface'
 
 export function tagViewReducer(state: ITagViewAction, action: ITagViewState): ITagViewAction {
   const { type, payload } = action
-  const { activeTag, deleteItem, tagList } = payload
+  const { activeTag, deleteItem, menuItem, tagList } = payload
   switch(type) {
     case ADD_TAG:
       return {
@@ -37,6 +40,27 @@ export function tagViewReducer(state: ITagViewAction, action: ITagViewState): IT
       return {
         ...state,
         deleteItem
+      }
+    case SET_MENU_ITEM:
+      return {
+        ...state,
+        menuItem
+      }
+    case REMOVE_OTHER_TAGS:
+      return {
+        ...state,
+        ...payload,
+        tagList: [
+          ...state.tagList.filter((i) => i.path === menuItem?.path || i.path === '/')
+        ]
+      }
+    case REMOVE_ALL_TAGS:
+      return {
+        ...state,
+        ...payload,
+        tagList: [
+          ...state.tagList.filter((i) => i.path === '/')
+        ]
       }
     default: 
       return state

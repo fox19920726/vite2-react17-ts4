@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react'
-import Form from './indexUi'
+import Form from './components/searchForm'
 
 const Todo: FC = () => {
 

@@ -1,10 +1,10 @@
 import React, { useState, FC } from 'react'
-import PropTypes from 'prop-types'
+import './index.scss'
+// import PropTypes from 'prop-types'
 
 interface Props {
   filterName: (name: string) => void
 }
-
 
 const Form: FC<Props> = (props) => {
   const [form, setForm] = useState({
@@ -64,8 +64,11 @@ const Form: FC<Props> = (props) => {
   )
 }
 
-Form.propTypes = {
-  filterName: PropTypes.func.isRequired
-}
+/*
+* 其实有了typeScript,不检查PropTypes也行的
+*/
+// Form.propTypes = {
+//   filterName: PropTypes.func.isRequired
+// }
 
 export default Form
