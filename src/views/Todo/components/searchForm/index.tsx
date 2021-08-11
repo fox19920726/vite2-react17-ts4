@@ -34,7 +34,11 @@ const Form: FC<Props> = (props) => {
   */
   const handleBlur = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     const { value } = e.currentTarget
-    if(e.key === 'ENTER') {
+    /*
+    * 他喵e.key本来全是大写字母的，突然变成驼峰了，吐了
+    * 全转为小写字母再判断靠谱一些
+    */
+    if(e.key.toLocaleLowerCase() === 'enter') {
       props.filterName(value)
     }
   }
