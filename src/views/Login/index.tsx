@@ -6,6 +6,7 @@ import { userEnterName, userLogin, userSuccess } from './reducer/action'
 import { login } from '@/api/api'
 import { ILogin } from '@/types/userInterface'
 import './index.scss'
+import { Button } from 'antd'
 // import a from './images/logo.png'
 
 const initState: ILogin = {
@@ -20,9 +21,7 @@ const Login: FC = () => {
 
   const history = useHistory()
 
-  const [state, dispatch] = useReducer(loginReducer, initState)
-
-  const { name, pwd, isLoading, isLoggedIn } = state
+  const [{ name, pwd, isLoading, isLoggedIn }, dispatch] = useReducer(loginReducer, initState)
 
   // 点击立即登录
   const handleLogin = async (): Promise<void> => {
@@ -65,7 +64,7 @@ const Login: FC = () => {
         placeholder="请输入"
         autoComplete="off"
       />
-      <button onClick={handleLogin}>立即登录</button>
+      <Button onClick={handleLogin} type="primary">立即登录</Button>
     </>
   )
 }

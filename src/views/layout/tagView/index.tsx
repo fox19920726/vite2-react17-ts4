@@ -56,7 +56,7 @@ const TagView: FC = () => {
     * 如果是就打开第length-1个tag
     * 目前关闭最后一个tag，会打开第length-1个tag
     * (存在问题是：关闭最后一个tag交互上没有问题，如果是关闭的中间的某个tag，他自动激活的还是第length-1个tag)
-    * (其实逻辑应该是激活当前关闭的tag的前一个tag,而不是第length-1个t
+    * (其实逻辑应该是激活当前关闭的tag的前一个tag,而不是第length-1个
     */
     if (activeTagPath === deleteItemPath) {
       const lastRoute = tagList[tagList.length - 1]

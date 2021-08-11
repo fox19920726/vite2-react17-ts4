@@ -1,3 +1,3 @@
-export { default as useRouteList } from './list/getRoutes'
-export { default as useUserInfo } from './list/getInfo'
-export { default as useTagView } from './list/tagView/index'
+export { default as useRouteList } from './getRoutes/index'
+export { default as useUserInfo } from './getInfo/index'
+export { default as useTagView } from './tagView/index'

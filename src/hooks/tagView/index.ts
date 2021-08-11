@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { IRoute, ITagView, ITagViewAction } from '@/types/menuInterface'
+import { IRoute, ITagViewAction } from '@/types/menuInterface'
 import { tagViewReducer } from './reducer/reducer'
 import { addTag, removeTag, setActive, setDelete, setMenuItem, removeOtherTags, removeAllTags } from './reducer/action'
 
