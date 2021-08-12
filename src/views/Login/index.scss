@@ -1,7 +1,14 @@
-.login{
-  background: yellow;
+.login-container{
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  @extend .vertical-center;
+  .ant-form{
+    text-align: left;
+  }
 }
 img{
+  margin: 0 auto 60px;
   width: 100px;
   height: 100px;
 }

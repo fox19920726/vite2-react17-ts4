@@ -18,15 +18,12 @@ export interface IUserState {
 }
 
 export interface ILogin {
-	name?: string
-	pwd?: string
-	isLoading?: boolean
-	error?: string
-	isLoggedIn?: boolean
+	userName: string
+	pwd: string
 }
 
-export interface ILoginState {
-	type: string
-	payload?: ILogin
+export interface IUserContext {
+  userInfo: IUserInfo
+  handleInfo: () => Promise<void>
 }
 // export type T1<T extends string> = T extends string ? { [K in T] : string } : never

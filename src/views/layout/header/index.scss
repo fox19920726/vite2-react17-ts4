@@ -1,4 +1,16 @@
 .header{
+    padding: 0 20px;
     color: rgb(8, 8, 8);
-    background: rgb(230, 228, 228);
+    background: #f0f2f5;
+}
+.logout-container{
+  text-align: right;
+}
+.logout-btn{
+  font-size: 16px;
+  color: #666;
+  transition: 0.2s all;
+  &:hover{
+    color: $blue;
+  }
 }

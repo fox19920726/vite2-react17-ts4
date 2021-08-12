@@ -13,6 +13,8 @@ const info = {
 
 const login = { ...info }
 
+const logout = { ...info }
+
 
 const user = [
   {
@@ -24,7 +26,12 @@ const user = [
     'url': '/user/info',
     'type': 'get',
     'response': info
+  },
+  {
+    'url': '/logout',
+    'type': 'get',
+    'response': logout
   }
-];
+]
 
 export default user

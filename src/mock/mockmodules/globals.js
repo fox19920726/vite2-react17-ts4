@@ -24,7 +24,7 @@ const asyncRoutes = Mock.mock({
     }]
   }, {
     'path': '/asyncList',
-    'component': 'List',
+    'component': 'Todo',
     'show': true,
     'meta': { 'title': '异步导航6' }
   }],

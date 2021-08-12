@@ -1,21 +1,12 @@
 import React,  { FC, useContext } from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import UserContext from '@/contexts/userContext'
-import RouteContex from '@/contexts/routeContext';
-import { useRouteList, useTagView } from '@/hooks'
-import './index.scss'
-
-import { Layout } from 'antd'
 import Login from '@/views/Login'
-import LayoutHeader from './header'
-import LayoutSider from './sider'
-import LayoutContent from './content'
-import TagView from './tagView'
+import ContentMain from './content'
+import './index.scss'
 
 const LayoutMain: FC = () => {
   const { userInfo: { token } } = useContext(UserContext)
-  const [paths, handleAsyncRoutes] = useRouteList()
-  const [tags, handleTag] = useTagView()
 
   return (
     <HashRouter>
@@ -28,20 +19,7 @@ const LayoutMain: FC = () => {
             if (!token) {
               return <Redirect to="/login" />
             }
-            return (
-              <Layout>
-                <LayoutHeader />
-                <Layout>
-                  <RouteContex.Provider value={{ paths, handleAsyncRoutes, ...{ tags, handleTag } }}>
-                    <LayoutSider />
-                    <Layout>
-                      <TagView />
-                      <LayoutContent />
-                    </Layout>
-                  </RouteContex.Provider>
-                </Layout>
-              </Layout>
-            )
+            return ( <ContentMain />)
           }}
         />
       </Switch>

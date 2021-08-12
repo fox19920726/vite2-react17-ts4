@@ -38,8 +38,9 @@ const LayoutSider: FC = () => {
     handleTag: { handleAddTag, handleSetActive }
   } = useContext(RouteContext)
 
+  let curt = {} as IRoute
+  
   const findTag = (paths: IRoute[], currentTagPath: string, tagList: IRoute[]): IRoute => {
-    let curt = {} as IRoute
     paths.forEach((i: IRoute) => {
       const { path, children } = i
       const pathArr = tagList.map((ci: IRoute) => ci.path)

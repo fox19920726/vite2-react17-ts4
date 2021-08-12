@@ -1,11 +1,6 @@
 import React from 'react'
-import { IRoute, ITagView } from '@/types/menuInterface'
+import { ITagViewContext } from '@/types/menuInterface'
 
-const paths: IRoute[] = []
-const handleAsyncRoutes = ():void => {}
-const tagViewContext = {} as ITagView
-
-
-const RouteContext = React.createContext({ paths, handleAsyncRoutes, ...tagViewContext })
+const RouteContext = React.createContext({} as ITagViewContext)
 
 export default RouteContext

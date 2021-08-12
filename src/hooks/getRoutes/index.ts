@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { message } from 'antd' 
 import { getAsyncRoutes } from '@/api/api'
 import routes from '@/router/routers' 
+import { IRoute } from '@/types/menuInterface'
 
 function useRouteList(): any[] {
   const [paths, setPath] = useState(routes)
@@ -19,9 +20,7 @@ function useRouteList(): any[] {
       message.info(msg)
     }
   }
-  useEffect(() => {
-    handleAsyncRoutes()
-  }, [])
+
   return [paths, handleAsyncRoutes]
 }
 

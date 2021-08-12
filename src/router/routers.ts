@@ -58,7 +58,7 @@ const paths: IRoute[] = [{
 }, {
   'path': '/todo',
   'component': 'Todo',
-  'show': false,
+  'show': true,
   'meta': { 'title': '导航4' }
 }]
 

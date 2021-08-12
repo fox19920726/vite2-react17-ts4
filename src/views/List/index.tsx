@@ -1,6 +1,7 @@
 import React, { useContext, FC } from 'react'
 import { Button } from 'antd';
 import UserContext from '@/contexts/userContext'
+import { useUserInfo } from '@/hooks';
 
 // Consumer下面只能写一个函数
 
@@ -10,7 +11,7 @@ const List: FC = () => {
     <div>
       <p>我叫：{userName}</p>
       <p>我叫：{roleName}</p>
-      <Button type="primary" htmlType="submit" onClick={handleInfo}>重新请求数据</Button>
+      <Button type="primary" htmlType="submit" onClick={handleInfo}>重新请求用户数据</Button>
     </div>
   )
 }

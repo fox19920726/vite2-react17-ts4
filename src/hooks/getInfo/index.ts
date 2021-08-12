@@ -1,7 +1,10 @@
-import React, { useReducer, useEffect } from 'react'
+import React, { useReducer } from 'react'
 import { getToken } from '@/utils/cookie'
 import { getUserInfo } from '@/api/api'
-import { IUserInfo, IUserState } from '@/types/userInterface'
+import { IUserInfo } from '@/types/userInterface'
+import { userInfoReducer } from './reducer/reducer'
+import { setInfo, clearInfo } from './reducer/action'
+import { removeToken } from '@/utils/cookie'
 
 const user: IUserInfo = {
   roleId: 0,
@@ -11,35 +14,25 @@ const user: IUserInfo = {
   userName: ''
 }
 
-function userInfoReducer(state: IUserInfo, action: IUserState): IUserInfo {
-  const { type, payload } = action
-
-  switch(type) {
-    case 'setInfo':
-      return {
-        ...state,
-        ...payload
-      }
-    default: 
-      return state
-  }
-}
-
 function useUserInfo(): any[] {
   const [state, dispatch] = useReducer(userInfoReducer, user)
 
   const handleInfo = async (): Promise<void> => {
     const { data } = await getUserInfo(getToken())
-    dispatch({
-      type: 'setInfo',
-      payload: data
-    })
+    dispatch(setInfo(data))
   }
 
-  useEffect(() => {
-    handleInfo()
-  }, [])
+  const handleExit = () => {
+    /* 
+    * 删除本地cookie
+    * 清除context里的user数据(其实并不需要删除，因为反正要刷新，哈哈哈哈哈)
+    * 刷新页面
+    */
+    removeToken()
+    dispatch(clearInfo(user))
+    window.location.reload()
+  }
 
-  return [state, handleInfo]
+  return [state, handleInfo, handleExit]
 } 
 export default useUserInfo

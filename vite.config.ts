@@ -10,16 +10,14 @@ export default defineConfig({
   server: {
     host: '0.0.0.0'
   },
-  // css: {
-  //   preprocessorOptions: {
-  //     // less: {
-  //     //   javascriptEnabled: true,
-  //     // }
-  //     scss: {
-  //       additionalData: `$injectedColor: orange;`
-  //     }
-  //   }
-  // },
+  css: {
+    preprocessorOptions: {
+      // 设置全局可调用的样式
+      scss: {
+        additionalData: '@import "./src/styles/public.scss";'
+      }
+    }
+  },
   // 静态文件目录
   publicDir: 'src/static',
   plugins: [

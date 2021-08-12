@@ -48,7 +48,9 @@ export interface ITagViewAction {
 }
 
 // tagView context
-export interface ITagView {
+export interface ITagViewContext {
+  paths: IRoute[]
+  handleAsyncRoutes: () => Promise<void>
 	tags: ITagViewAction
 	handleTag: ITagViewFn
 }

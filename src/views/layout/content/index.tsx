@@ -1,35 +1,40 @@
-import React, { FC, useContext } from 'react'
-import { Layout } from 'antd'
-import { Switch, Route } from 'react-router-dom'
+import React, { FC, useContext, useEffect } from 'react'
+import UserContext from '@/contexts/userContext'
 import RouteContext from '@/contexts/routeContext'
-import { IRoute } from '@/types/menuInterface'
-import components from '@/router/components'
-import './index.scss'
 
-const { Content } = Layout
+import { Layout } from 'antd'
+import LayoutHeader from '@/views/Layout/header'
+import LayoutSider from '@/views/Layout/sider'
+import LayoutContent from './components/layoutContent'
+import TagView from '@/views/Layout/tagView'
 
-function setRoute(paths: IRoute[]): any {
-  return (
-    paths.map((item) => {
-      const { children, path, component, show } = item
-      if(children?.length){
-        return setRoute(children)
-      }
-      return component && <Route exact path={path} key={path} component={components[component]} />
-    })
-  )
-}
+const ContentMain: FC = () => {
+  const { handleInfo } = useContext(UserContext)
+  const { handleAsyncRoutes } = useContext(RouteContext)
 
-const LayoutContent: FC = () => {
-  const { paths } = useContext(RouteContext)
+  useEffect(() => {
+    /*
+    * useEffect本身不支持async Promise<void>这样的
+    * 可以用这样的自执行函数去实现
+    */
+    (async (): Promise<void> => {
+      await handleInfo()
+      handleAsyncRoutes()
+    })()
+  }, [])
+
   return (
     <Layout>
-      <Content className="content">
-        <Switch>
-          {setRoute(paths)}
-        </Switch>
-      </Content>
+      <LayoutHeader />
+      <Layout>
+        <LayoutSider />
+        <Layout>
+          <TagView />
+          <LayoutContent />
+        </Layout>
+      </Layout>
     </Layout>
   )
 }
-export default LayoutContent
+
+export default ContentMain
