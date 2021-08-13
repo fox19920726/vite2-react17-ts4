@@ -1,7 +1,6 @@
 import React, { useContext, FC } from 'react'
-import { Button } from 'antd';
+import { Button } from 'antd'
 import UserContext from '@/contexts/userContext'
-import { useUserInfo } from '@/hooks';
 
 // Consumer下面只能写一个函数
 

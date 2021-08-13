@@ -7,3 +7,21 @@ $blue: #18a9ea;
   left: 50%;
   transform: translate(-50%, -51%);
 }
+
+// 路由转场动画
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  opacity: 1;
+  transition: all 0.2s ease-out;
+  transform: translateX(0);
+}
+
+.fade-exit {
+  opacity: 0;
+  transform: translateX(30px);
+}

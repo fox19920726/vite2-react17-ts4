@@ -19,7 +19,7 @@ export interface IUserState {
 
 export interface ILogin {
 	userName: string
-	pwd: string
+	password: string
 }
 
 export interface IUserContext {

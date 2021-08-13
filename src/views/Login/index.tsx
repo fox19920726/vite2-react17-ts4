@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { setToken } from '@/utils/cookie'
 import { login } from '@/api/api'
@@ -10,11 +10,11 @@ import RouteContext from '@/contexts/routeContext'
 
 const Login: FC = () => {
   const history = useHistory()
-  const { handleInfo } = useContext(UserContext)
+  const { userInfo: { token }, handleInfo } = useContext(UserContext)
   const { handleAsyncRoutes } = useContext(RouteContext)
 
-  const onFinish = async ({ name, pwd }: ILogin) => {
-    const { code, data: { token }  } = await login(name, pwd)
+  const onFinish = async ({ userName, password }: ILogin) => {
+    const { code, data: { token }  } = await login(userName, password)
     if (code === 200) {
       /*
       * 登陆成功后把token设置到cookie里
@@ -34,6 +34,15 @@ const Login: FC = () => {
     console.log('Failed:', errorInfo);
   }
 
+  useEffect(() => {
+    /*
+    * 目前拿得到token的话就直接跳转去首页
+    * 也不知道这样的操作合不合理
+    * 有没有别的奇技淫巧
+    */
+    token && history.push('/')
+  }, [])
+
   return ( 
     <div className="login-container">
       <img src="/images/logo.png" alt="这张图纯粹是为了测试静态资源文件夹设置的是否正确" />
@@ -45,14 +54,14 @@ const Login: FC = () => {
       >
         <Form.Item
           label="用户名"
-          name="name"
+          name="userName"
           rules={[{ required: true, message: '请输入用户名' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="密码"
-          name="pwd"
+          name="password"
           rules={[{ required: true, message: '请输入密码' }]}
         >
           <Input />

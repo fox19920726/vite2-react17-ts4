@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import { getToken } from '@/utils/cookie'
-import { getUserInfo } from '@/api/api'
+import { getUserInfo, goExit } from '@/api/api'
 import { IUserInfo } from '@/types/userInterface'
 import { userInfoReducer } from './reducer/reducer'
 import { setInfo, clearInfo } from './reducer/action'
@@ -22,12 +22,14 @@ function useUserInfo(): any[] {
     dispatch(setInfo(data))
   }
 
-  const handleExit = () => {
+  const handleExit = async() => {
     /* 
+    * 退出登陆
     * 删除本地cookie
     * 清除context里的user数据(其实并不需要删除，因为反正要刷新，哈哈哈哈哈)
     * 刷新页面
     */
+    await goExit()
     removeToken()
     dispatch(clearInfo(user))
     window.location.reload()

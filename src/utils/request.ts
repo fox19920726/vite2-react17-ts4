@@ -1,7 +1,6 @@
 import { message } from 'antd'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getToken, removeToken } from './cookie'
-
 // const isProduction = 'production'
 // const isServer = 'local'
 
@@ -27,13 +26,18 @@ service.interceptors.request.use(
 // 访问接口成功后的code码需要全公司统一，用来统一处理每个code对应的策略
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    // 访问接口成功后的code码需要全公司统一，用来统一处理每个code对应的策略
     const { code } = response.data
     if (code && code !== 200) {
-      // 未登录状态下应该：1、提示未登录 2、删除本地cookie的token记录 3、跳转至登陆界面
+      /*
+      * 未登录状态下应该：
+      * 1、提示未登录
+      * 2、删除本地cookie的token记录
+      * 3、刷新界面会自动跳转到登陆页
+      */
       if (code === 401) {
         message.error({ content: '请先登陆～' })
         removeToken()
+        window.location.reload()
       }
       console.log('error')
       return Promise.reject(new Error(response.data.msg || 'Error'))
@@ -45,8 +49,9 @@ service.interceptors.response.use(
     const { status } = response
     // const { errmsg } = response.data
     if (status === 401) {
-      // 未登录状态下应该：1、提示未登录 2、删除本地cookie的token记录 3、跳转至登陆界面
-      console.log('error')
+      message.error({ content: '请先登陆～' })
+      removeToken()
+      window.location.reload()
     }
     return Promise.reject(error)
   }
@@ -54,11 +59,13 @@ service.interceptors.response.use(
 
 // export default service.request
 
-export default async <T>(c: AxiosRequestConfig): Promise<T|undefined> => {
+export default async <T>(c: AxiosRequestConfig): Promise<T> => {
   try{
     const { data } = await service.request<T>(c)
     return data
   } catch (e) {
     message.error({ content: '哎呀，出错啦～' })
+    // 我觉得我学到精髓了，笑死
+    return {} as T
   }
 }
