@@ -1,0 +1,14 @@
+.collapse-container{
+  font-size: 20px;
+  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &.unfold{
+    left: 30px;
+  }
+  &.fold{
+    left: 85px;
+  }
+}

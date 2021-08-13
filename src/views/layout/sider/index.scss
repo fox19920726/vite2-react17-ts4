@@ -7,3 +7,7 @@
 .site-layout-background{
   background-color: #fff;
 }
+.ant-menu-root{
+  height: calc(100vh - 135px);
+  overflow-y: scroll;
+}

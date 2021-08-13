@@ -131,11 +131,11 @@ div:focus {
 }
 
 // antd的按钮动画效果恶心死我了，吐了
-button[ant-click-animating-without-extra-node]:after {
-  border: 0 none;
-  opacity: 0;
-  animation:none 0 ease 0 1 normal;
-}
+// button[ant-click-animating-without-extra-node]:after {
+//   border: 0 none;
+//   opacity: 0;
+//   animation:none 0 ease 0 1 normal;
+// }
 .ant-tag,.ant-tag-close-icon{
   transition: none !important;
 }

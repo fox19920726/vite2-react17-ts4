@@ -42,17 +42,13 @@ const TagView: FC = () => {
   }
 
   useEffect(() => {
-    /* 
-    * 删除tag的时候,要去比较是否删的是当前激活的tag
-    * 如果是，就激活第length-1个tag
-    * 不是的话其实就不需要做什么操作
-    */
     const activeTagPath = activeTag?.path
     const deleteItemPath = deleteItem?.path
     
     /*
     * 这里其实得优化
     * 目前判断了关闭的tag是不是当前激活状态的tag
+    * 不是的话其实就不需要做什么操作
     * 如果是就打开第length-1个tag
     * 目前关闭最后一个tag，会打开第length-1个tag
     * (存在问题是：关闭最后一个tag交互上没有问题，如果是关闭的中间的某个tag，他自动激活的还是第length-1个tag)
