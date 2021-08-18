@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 import RouteContext from '@/contexts/routeContext'
-import { ITagMenu } from '@/types/menuInterface'
+import { ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import { useHistory } from 'react-router-dom'
 

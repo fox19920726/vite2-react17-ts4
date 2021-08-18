@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react'
 import RouteContext from '@/contexts/routeContext'
 import { Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
-import { IRoute, ITagMenu } from '@/types/menuInterface'
+import { IRoute, ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import ContextMenu from './components/contextMenu'
 

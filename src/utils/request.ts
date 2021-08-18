@@ -64,6 +64,7 @@ export default async <T>(c: AxiosRequestConfig): Promise<T> => {
     const { data } = await service.request<T>(c)
     return data
   } catch (e) {
+    console.log(e)
     message.error({ content: '哎呀，出错啦～' })
     // 我觉得我学到精髓了，笑死
     return {} as T

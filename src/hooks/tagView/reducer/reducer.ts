@@ -8,7 +8,7 @@ import {
   REMOVE_ALL_TAGS
 } from './types'
 
-import { ITagViewState, ITagViewAction } from '@/types/menuInterface'
+import { ITagViewState, ITagViewAction } from '@/tsTypes/menuInterface.d'
 
 export function tagViewReducer(state: ITagViewAction, action: ITagViewState): ITagViewAction {
   const { type, payload } = action

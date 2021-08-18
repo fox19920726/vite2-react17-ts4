@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Button } from 'antd'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { IHamburger } from '@/types/collapseInterface'
+import { IHamburger } from './index.d'
 import './index.scss'
 
 const Hamburger: FC<IHamburger> = (props) => {

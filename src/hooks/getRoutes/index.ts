@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { message } from 'antd' 
 import { getAsyncRoutes } from '@/api/api'
 import routes from '@/router/routers' 
-import { IRoute } from '@/types/menuInterface'
 
-function useRouteList(): any[] {
+function useRouteList() {
   const [paths, setPath] = useState(routes)
   const handleAsyncRoutes = async (): Promise<void> => {
     const { rows, code, msg } = await getAsyncRoutes()
@@ -21,7 +20,7 @@ function useRouteList(): any[] {
     }
   }
 
-  return [paths, handleAsyncRoutes]
+  return [paths, handleAsyncRoutes] as const
 }
 
 export default useRouteList

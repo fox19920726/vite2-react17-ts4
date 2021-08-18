@@ -1,5 +1,5 @@
 // import { FC } from 'react'
-import { IComponent } from '@/types/menuInterface'
+import { IComponent } from '@/tsTypes/menuInterface.d'
 import Dashbord from '@/views/Dashbord'
 import List from '@/views/List'
 import Login from '@/views/Login'

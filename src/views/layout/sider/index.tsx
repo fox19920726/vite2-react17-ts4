@@ -1,7 +1,7 @@
 import React,  { FC, useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import RouteContext from '@/contexts/routeContext'
-import { IRoute } from '@/types/menuInterface'
+import { IRoute } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import { Menu, Layout } from 'antd'
 import { AlertOutlined } from '@ant-design/icons'

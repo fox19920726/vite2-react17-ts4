@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const useCollapsed = (): any[] => {
+const useCollapsed = () => {
   const [collapse, setCollapse] = useState(false)
 
   const handleCollapse = (flag: boolean): void => {
@@ -14,7 +14,7 @@ const useCollapsed = (): any[] => {
     setCollapse(firstState === '1')
   }, [])
 
-  return [collapse, handleCollapse]
+  return [collapse, handleCollapse] as const
 }
 
 export default useCollapsed

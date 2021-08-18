@@ -1,5 +1,5 @@
 import React from 'react'
-import { IUserContext } from '@/types/userInterface'
+import { IUserContext } from '@/tsTypes/userInterface.d'
 
 const UserContext = React.createContext({} as IUserContext)
 

@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { IRoute, ITagViewAction } from '@/types/menuInterface'
+import { IRoute, ITagViewAction } from '@/tsTypes/menuInterface.d'
 import { tagViewReducer } from './reducer/reducer'
 import { addTag, removeTag, setActive, setDelete, setMenuItem, removeOtherTags, removeAllTags } from './reducer/action'
 
@@ -7,7 +7,7 @@ const tagView: ITagViewAction = {
   tagList: [] as IRoute[]
 }
 
-function useTagView(): any[] {
+function useTagView() {
   const [tags, dispatch] = useReducer(tagViewReducer, tagView)
 
   const handleAddTag = (route: IRoute): void => {
@@ -46,6 +46,6 @@ function useTagView(): any[] {
     handleSetMenuItem,
     handleRemoveOtherTags,
     handleRemoveAllTags
-  }]
+  }] as const
 } 
 export default useTagView

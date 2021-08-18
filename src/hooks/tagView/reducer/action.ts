@@ -8,7 +8,7 @@ import {
   REMOVE_ALL_TAGS
 } from './types'
 
-import { ITagViewState, IRoute } from '@/types/menuInterface'
+import { ITagViewState, IRoute } from '@/tsTypes/menuInterface.d'
 
 export const addTag = (route: IRoute): ITagViewState => ({
   type: ADD_TAG,

@@ -3,7 +3,7 @@
 // import.meta.glob('/src/views/Login/*.tsx')
 // import.meta.glob('/src/views/Login/*.tsx')
 
-import { IRoute } from '@/types/menuInterface'
+import { IRoute } from '@/tsTypes/menuInterface.d'
 
 /* 
 * show设置为false，在菜单里是看不到的

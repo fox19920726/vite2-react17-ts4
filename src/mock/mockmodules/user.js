@@ -29,7 +29,7 @@ const user = [
   },
   {
     'url': '/logout',
-    'type': 'get',
+    'type': 'post',
     'response': logout
   }
 ]

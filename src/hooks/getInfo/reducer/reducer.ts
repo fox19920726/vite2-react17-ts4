@@ -1,6 +1,6 @@
 import { CLEAR_INFO, SET_INFO } from './types'
   
-import { IUserInfo, IUserState } from '@/types/userInterface'
+import { IUserInfo, IUserState } from '@/tsTypes/userInterface.d'
 
 export function userInfoReducer(state: IUserInfo, action: IUserState): IUserInfo {
   const { type, payload } = action
