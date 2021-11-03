@@ -1,17 +1,18 @@
-import React, { FC, useContext, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useUserInfo, useRouteList } from '@/hooks'
+import { useSelector } from 'react-redux'
 import { setToken } from '@/utils/cookie'
 import { login } from '@/api/api'
 import { ILogin } from '@/tsTypes/userInterface.d'
 import './index.scss'
 import { Button, Form, Input } from 'antd'
-import UserContext from '@/contexts/userContext'
-import RouteContext from '@/contexts/routeContext'
 
 const Login: FC = () => {
   const history = useHistory()
-  const { userInfo: { token }, handleInfo } = useContext(UserContext)
-  const { handleAsyncRoutes } = useContext(RouteContext)
+  const { token } = useSelector(({ userInfoReducer }) => userInfoReducer)
+  const [handleInfo] = useUserInfo()
+  const [handleAsyncRoutes] = useRouteList()
 
   const onFinish = async ({ userName, password }: ILogin) => {
     const { code, data: { token }  } = await login(userName, password)

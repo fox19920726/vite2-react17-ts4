@@ -1,9 +1,9 @@
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { Layout } from 'antd'
 import { Switch, Route, useHistory } from 'react-router-dom'
-import RouteContext from '@/contexts/routeContext'
 import { IRoute } from '@/tsTypes/menuInterface.d'
 import components from '@/router/components'
+import { useSelector } from 'react-redux'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
 
@@ -23,7 +23,8 @@ function setRoute(paths: IRoute[]): any {
 
 const LayoutContent: FC = () => {
   const { location: { pathname } } = useHistory()
-  const { paths } = useContext(RouteContext)
+  const paths = useSelector(({ routerReducer }) => routerReducer)
+
   return (
     <Layout>
       <Content className="content">

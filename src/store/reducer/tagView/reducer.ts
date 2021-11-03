@@ -10,9 +10,16 @@ import {
 
 import { ITagViewState, ITagViewAction } from '@/tsTypes/menuInterface.d'
 
-export function tagViewReducer(state: ITagViewAction, action: ITagViewState): ITagViewAction {
+const initial = {
+  activeTag: {},
+  deleteItem: {},
+  menuItem: {},
+  tagList: []
+} as ITagViewAction
+
+const tagViewReducer = (state = initial, action: ITagViewState): ITagViewAction => {
   const { type, payload } = action
-  const { activeTag, deleteItem, menuItem, tagList } = payload
+  const { activeTag, deleteItem, menuItem, tagList } = payload || initial
   switch(type) {
     case ADD_TAG:
       return {
@@ -66,3 +73,5 @@ export function tagViewReducer(state: ITagViewAction, action: ITagViewState): IT
       return state
   }
 }
+
+export default tagViewReducer

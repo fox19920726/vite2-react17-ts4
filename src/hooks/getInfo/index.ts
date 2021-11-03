@@ -1,9 +1,10 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { getToken } from '@/utils/cookie'
 import { getUserInfo, goExit } from '@/api/api'
 import { IUserInfo } from '@/tsTypes/userInterface.d'
-import { userInfoReducer } from './reducer/reducer'
-import { setInfo, clearInfo } from './reducer/action'
+import { useSelector, useDispatch } from 'react-redux'
+import { setInfo, clearInfo } from '@/store/reducer/getInfo/action'
+
 import { removeToken } from '@/utils/cookie'
 
 const user: IUserInfo = {
@@ -15,7 +16,7 @@ const user: IUserInfo = {
 }
 
 function useUserInfo() {
-  const [state, dispatch] = useReducer(userInfoReducer, user)
+  const dispatch = useDispatch()
 
   const handleInfo = async (): Promise<void> => {
     const { data } = await getUserInfo(getToken())
@@ -34,7 +35,6 @@ function useUserInfo() {
     dispatch(clearInfo(user))
     window.location.reload()
   }
-
-  return [state, handleInfo, handleExit] as const
+  return [handleInfo, handleExit] as const
 } 
 export default useUserInfo

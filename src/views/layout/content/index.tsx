@@ -1,7 +1,5 @@
-import React, { FC, useContext, useEffect } from 'react'
-import UserContext from '@/contexts/userContext'
-import RouteContext from '@/contexts/routeContext'
-
+import React, { FC, useEffect } from 'react'
+import { useUserInfo, useRouteList } from '@/hooks'
 import { Layout } from 'antd'
 import LayoutHeader from '@/views/Layout/header'
 import LayoutSider from '@/views/Layout/sider'
@@ -9,8 +7,8 @@ import LayoutContent from './components/layoutContent'
 import TagView from '@/views/Layout/tagView'
 
 const ContentMain: FC = () => {
-  const { handleInfo } = useContext(UserContext)
-  const { handleAsyncRoutes } = useContext(RouteContext)
+  const [handleInfo] = useUserInfo()
+  const [handleAsyncRoutes] = useRouteList()
 
   useEffect(() => {
     /*

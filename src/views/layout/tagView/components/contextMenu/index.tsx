@@ -1,16 +1,15 @@
-import React, { FC, useContext } from 'react'
-import RouteContext from '@/contexts/routeContext'
+import React, { FC } from 'react'
 import { ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import { useHistory } from 'react-router-dom'
+import { useTagView } from '@/hooks'
+import { useSelector } from 'react-redux'
 
 const ContextMenu: FC<ITagMenu> = (props) => {
   const { left, top, item } = props
   const history = useHistory()
-  const {
-    tags: { tagList },
-    handleTag: { handleSetActive, handleRemoveOtherTags, handleRemoveAllTags }
-  } = useContext(RouteContext)
+  const { tagList } = useSelector(({ tagViewReducer }) => tagViewReducer)
+  const { handleSetActive, handleRemoveOtherTags, handleRemoveAllTags } = useTagView()
 
   const handleRefresh = () => {
     console.log(2)

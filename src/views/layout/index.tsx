@@ -1,13 +1,15 @@
 import React,  { FC, useContext } from 'react'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import UserContext from '@/contexts/userContext'
+// import UserContext from '@/contexts/userContext'
 import Login from '@/views/Login'
 import ContentMain from './content'
 import './index.scss'
+import { useSelector } from 'react-redux'
+import { useUserInfo } from '@/hooks'
+
 
 const LayoutMain: FC = () => {
-  const { userInfo: { token } } = useContext(UserContext)
-
+  const { token } = useSelector(({ userInfoReducer }) => userInfoReducer)
   return (
     <HashRouter>
       <Switch>

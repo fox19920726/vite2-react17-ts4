@@ -1,14 +1,10 @@
-import React, { useReducer } from 'react'
-import { IRoute, ITagViewAction } from '@/tsTypes/menuInterface.d'
-import { tagViewReducer } from './reducer/reducer'
-import { addTag, removeTag, setActive, setDelete, setMenuItem, removeOtherTags, removeAllTags } from './reducer/action'
-
-const tagView: ITagViewAction = {
-  tagList: [] as IRoute[]
-}
+import React from 'react'
+import { IRoute } from '@/tsTypes/menuInterface.d'
+import { useDispatch } from 'react-redux'
+import { addTag, removeTag, setActive, setDelete, setMenuItem, removeOtherTags, removeAllTags } from '@/store/reducer/tagView/action'
 
 function useTagView() {
-  const [tags, dispatch] = useReducer(tagViewReducer, tagView)
+  const dispatch = useDispatch()
 
   /*
   * 这里其实可以用函数重载的方式去优化代码（function overload）
@@ -46,7 +42,7 @@ function useTagView() {
     dispatch(removeAllTags())
   }
 
-  return [tags, {
+  return {
     handleAddTag,
     handleRemoveTag,
     handleSetActive,
@@ -54,6 +50,6 @@ function useTagView() {
     handleSetMenuItem,
     handleRemoveOtherTags,
     handleRemoveAllTags
-  }] as const
+   } as const
 } 
 export default useTagView

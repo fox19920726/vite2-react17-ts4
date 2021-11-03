@@ -1,12 +1,13 @@
-import React,  { FC, useContext, useEffect, useState } from 'react'
+import React,  { FC, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import RouteContext from '@/contexts/routeContext'
+import { useTagView } from '@/hooks'
 import { IRoute } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import { Menu, Layout } from 'antd'
 import { AlertOutlined } from '@ant-design/icons'
 import Hamburger from './components/hamburger'
 import useCollapsed from '@/hooks/collapse'
+import { useSelector } from 'react-redux'
 
 /*
 * 如果该菜单设置显示，并且他只有一个子路由
@@ -36,12 +37,9 @@ function setSider(paths: IRoute[], flag?: boolean) {
 }
 
 const LayoutSider: FC = () => {
-  const {
-    paths,
-    tags: { activeTag, tagList },
-    handleTag: { handleAddTag, handleSetActive }
-  } = useContext(RouteContext)
-
+  const { activeTag, tagList } = useSelector(({ tagViewReducer }) => tagViewReducer)
+  const paths = useSelector(({ routerReducer }) => routerReducer)
+  const { handleAddTag, handleSetActive } = useTagView()
   const [collapse, handleCollapse] = useCollapsed()
 
   let curt = {} as IRoute
@@ -82,8 +80,8 @@ const LayoutSider: FC = () => {
     * 开发的时候每次修改文件
     * 他都默认往里push一个，忒烦。。。
     */
-    !tagList.length && handleAddTag(route)
-  }, [])
+    !tagList.length && route && handleAddTag(route)
+  }, [paths])
 
   return (
     <>

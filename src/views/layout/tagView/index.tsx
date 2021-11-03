@@ -1,19 +1,19 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
-import RouteContext from '@/contexts/routeContext'
+import React, { FC, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { IRoute, ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import ContextMenu from './components/contextMenu'
+import { useTagView } from '@/hooks'
+
 
 const menuItem = { left: 0, top: 0, item: {} } as ITagMenu
 
 const TagView: FC = () => {
   const history = useHistory()
-  const {
-    tags: { activeTag, deleteItem, tagList },
-    handleTag: { handleRemoveTag, handleSetActive }
-  } = useContext(RouteContext)
+  const { activeTag, tagList, deleteItem } = useSelector(({ tagViewReducer }) => tagViewReducer)
+  const { handleSetActive, handleRemoveTag } = useTagView()
   const [{ left, top, item }, setState] = useState(menuItem)
 
   const handleClickTag = (i: IRoute) => {
