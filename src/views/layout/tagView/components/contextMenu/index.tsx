@@ -2,14 +2,15 @@ import React, { FC } from 'react'
 import { ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import { useHistory } from 'react-router-dom'
-import { useTagView } from '@/hooks'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setActive, removeOtherTags, removeAllTags, tagViewSelector } from '@/store/slice/tagView'
 
 const ContextMenu: FC<ITagMenu> = (props) => {
   const { left, top, item } = props
+  const dispatch = useDispatch()
   const history = useHistory()
-  const { tagList } = useSelector(({ tagViewReducer }) => tagViewReducer)
-  const { handleSetActive, handleRemoveOtherTags, handleRemoveAllTags } = useTagView()
+  const { data: { tagList } } = useSelector(tagViewSelector)
+
 
   const handleRefresh = () => {
     console.log(2)
@@ -30,8 +31,8 @@ const ContextMenu: FC<ITagMenu> = (props) => {
     * 要把当前的menuItem设置为激活
     * 并跳转到对应路由
     */
-    handleRemoveOtherTags(item)
-    handleSetActive(item)
+    dispatch(removeOtherTags(item))
+    dispatch(setActive(item))
     history.replace(item.path)
   }
   const handleCloseAllTags = () => {
@@ -41,8 +42,8 @@ const ContextMenu: FC<ITagMenu> = (props) => {
     * 并跳转到dashboard的路由页面
     */
     const item = tagList[0]
-    handleRemoveAllTags()
-    handleSetActive(item)
+    dispatch(removeAllTags())
+    dispatch(setActive(item))
     history.replace(item.path)
   }
 

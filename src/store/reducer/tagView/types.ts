@@ -1,7 +1,0 @@
-export const ADD_TAG = 'add_tag'
-export const REMOVE_TAG = 'remove_tag'
-export const SET_ACTIVE = 'set_active'
-export const SET_DELETE = 'set_delete'
-export const SET_MENU_ITEM = 'set_menu_item'
-export const REMOVE_OTHER_TAGS = 'remove_other_tags'
-export const REMOVE_ALL_TAGS = 'remove_all_tags'

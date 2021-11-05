@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { IData, IUserInfo } from '@/tsTypes/userInterface.d'
+import { IData } from '@/tsTypes/userInterface.d'
 import { IAsyncRoute } from '@/tsTypes/menuInterface.d'
 
 // AxiosResponse

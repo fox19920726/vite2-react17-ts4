@@ -1,28 +1,29 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { IRoute, ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import ContextMenu from './components/contextMenu'
-import { useTagView } from '@/hooks'
+import { setActive, removeTag } from '@/store/slice/tagView'
+import { tagViewSelector } from '@/store/slice/tagView'
 
 
 const menuItem = { left: 0, top: 0, item: {} } as ITagMenu
 
 const TagView: FC = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
-  const { activeTag, tagList, deleteItem } = useSelector(({ tagViewReducer }) => tagViewReducer)
-  const { handleSetActive, handleRemoveTag } = useTagView()
+  const { data: { activeTag, tagList, deleteItem } } = useSelector(tagViewSelector)
   const [{ left, top, item }, setState] = useState(menuItem)
 
   const handleClickTag = (i: IRoute) => {
     history.replace(i.path)
-    handleSetActive(i)
+    dispatch(setActive(i))
   }
 
   const handleCloseTag = (i: IRoute) => {
-    handleRemoveTag(i)
+    dispatch(removeTag(i))
   }
 
   const handleOpenMenu = (i: IRoute, e: React.MouseEvent) => {
@@ -57,7 +58,7 @@ const TagView: FC = () => {
     if (activeTagPath === deleteItemPath) {
       const lastRoute = tagList[tagList.length - 1]
       tagList.length && history.replace(lastRoute.path)
-      handleSetActive(lastRoute)
+      dispatch(setActive(lastRoute))
     }
   }, [tagList])
 

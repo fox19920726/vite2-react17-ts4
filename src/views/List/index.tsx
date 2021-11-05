@@ -1,14 +1,13 @@
-import React, { useContext, FC } from 'react'
+import React, { FC } from 'react'
 import { Button } from 'antd'
-import UserContext from '@/contexts/userContext'
-import { useUserInfo } from '@/hooks'
 import { useSelector } from 'react-redux'
+import { userInfoSelector } from '@/store/slice/getInfo'
+import { useUserInfo } from '@/hooks'
 // Consumer下面只能写一个函数
 
 const List: FC = () => {
-  // const { userInfo: { userName, roleName }, handleInfo } = useContext(UserContext)
-  const { userName, roleName } = useSelector(({ userInfoReducer }) => userInfoReducer)
-  const [handleInfo] = useUserInfo()
+  const { data: { userName, roleName } } = useSelector(userInfoSelector)
+  const { handleInfo } = useUserInfo()
   return (
     <div>
       <p>我叫：{userName}</p>

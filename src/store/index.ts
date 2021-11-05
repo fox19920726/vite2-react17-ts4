@@ -1,11 +1,15 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
-import promiseMiddleware from 'redux-promise'
-import modules from './reducer'
+import { configureStore, combineReducers, ThunkAction, Action } from '@reduxjs/toolkit'
+import modules from './slice'
 
-const store = createStore(
-	combineReducers(modules),
-	applyMiddleware(thunk, promiseMiddleware)
-)
+const store = configureStore({
+  reducer: combineReducers(modules)
+})
 
+export type RootState = ReturnType<typeof store.getState>
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>
 export default store

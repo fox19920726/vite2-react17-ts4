@@ -1,9 +1,8 @@
-import React from 'react'
 import { message } from 'antd' 
 import { useDispatch } from 'react-redux'
 import { getAsyncRoutes } from '@/api/api'
 import routes from '@/router/routers' 
-import { setRoutes } from '@/store/reducer/getRoutes/action'
+import { setRoutes } from '@/store/slice/getRoutes'
 
 function useRouteList() {
   const dispatch = useDispatch()
@@ -23,7 +22,7 @@ function useRouteList() {
     }
   }
 
-  return [handleAsyncRoutes] as const
+  return handleAsyncRoutes
 }
 
 export default useRouteList

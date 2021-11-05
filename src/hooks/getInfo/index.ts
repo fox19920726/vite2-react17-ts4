@@ -1,19 +1,8 @@
-import React from 'react'
 import { getToken } from '@/utils/cookie'
 import { getUserInfo, goExit } from '@/api/api'
-import { IUserInfo } from '@/tsTypes/userInterface.d'
-import { useSelector, useDispatch } from 'react-redux'
-import { setInfo, clearInfo } from '@/store/reducer/getInfo/action'
-
+import { useDispatch } from 'react-redux'
+import { setInfo, clearInfo } from '@/store/slice/getInfo' 
 import { removeToken } from '@/utils/cookie'
-
-const user: IUserInfo = {
-  roleId: 0,
-  roleName: '',
-  token: getToken(),
-  userId: 0,
-  userName: ''
-}
 
 function useUserInfo() {
   const dispatch = useDispatch()
@@ -32,9 +21,9 @@ function useUserInfo() {
     */
     await goExit()
     removeToken()
-    dispatch(clearInfo(user))
+    dispatch(clearInfo())
     window.location.reload()
   }
-  return [handleInfo, handleExit] as const
+  return { handleInfo, handleExit } as const
 } 
 export default useUserInfo

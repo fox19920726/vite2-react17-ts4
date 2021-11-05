@@ -29,36 +29,12 @@ export interface IAsyncRoute {
 	code: number
 }
 
-export interface ITagViewFn {
-	handleAddTag: (i: IRoute) => void
-	handleRemoveTag: (i: IRoute) => void
-	handleSetActive: (i: IRoute) => void
-	handleSetDelete: (i: IRoute) => void
-  handleSetMenuItem: (i: IRoute) => void
-  handleRemoveOtherTags: (i: IRoute) => void
-  handleRemoveAllTags: () => void
-}
-
 // tagView action
 export interface ITagViewAction {
-  activeTag?: IRoute
-  deleteItem?: IRoute
-  menuItem?: IRoute
+  activeTag: IRoute
+  deleteItem: IRoute
+  menuItem: IRoute
   tagList: IRoute[]
-}
-
-// tagView context
-export interface ITagViewContext {
-  paths: IRoute[]
-  handleAsyncRoutes: () => Promise<void>
-	tags: ITagViewAction
-	handleTag: ITagViewFn
-}
-
-// 路由hook
-export interface ITagViewState {
-	type: string
-	payload: ITagViewAction
 }
 
 // 右键tagview

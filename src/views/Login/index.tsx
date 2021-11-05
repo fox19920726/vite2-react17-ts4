@@ -7,12 +7,13 @@ import { login } from '@/api/api'
 import { ILogin } from '@/tsTypes/userInterface.d'
 import './index.scss'
 import { Button, Form, Input } from 'antd'
+import { userInfoSelector } from '@/store/slice/getInfo'
 
 const Login: FC = () => {
   const history = useHistory()
-  const { token } = useSelector(({ userInfoReducer }) => userInfoReducer)
-  const [handleInfo] = useUserInfo()
-  const [handleAsyncRoutes] = useRouteList()
+  const { data: { token } } = useSelector(userInfoSelector)
+  const { handleInfo } = useUserInfo()
+  const handleAsyncRoutes = useRouteList()
 
   const onFinish = async ({ userName, password }: ILogin) => {
     const { code, data: { token }  } = await login(userName, password)

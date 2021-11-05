@@ -6,6 +6,7 @@ import components from '@/router/components'
 import { useSelector } from 'react-redux'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
+import { routerSelector } from '@/store/slice/getRoutes'
 
 const { Content } = Layout
 
@@ -23,7 +24,7 @@ function setRoute(paths: IRoute[]): any {
 
 const LayoutContent: FC = () => {
   const { location: { pathname } } = useHistory()
-  const paths = useSelector(({ routerReducer }) => routerReducer)
+  const { data: paths } = useSelector(routerSelector)
 
   return (
     <Layout>

@@ -1,5 +1,5 @@
-import React, { FC, useContext } from 'react'
-import { Button, Layout, Row, Col } from 'antd'
+import React, { FC } from 'react'
+import { Layout, Row, Col } from 'antd'
 import { LoginOutlined } from '@ant-design/icons'
 import './index.scss'
 import { useUserInfo } from '@/hooks'
@@ -11,7 +11,7 @@ const LayoutHeader: FC = () => {
   * 反正退出账号后，也不需要数据关联
   * 所以直接从自定义hook里执行方法也行
   */
-  const [, handleExit] = useUserInfo()
+  const { handleExit } = useUserInfo()
 
   return (
     <Layout>

@@ -1,14 +1,15 @@
 import React,  { FC, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useTagView } from '@/hooks'
 import { IRoute } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import { Menu, Layout } from 'antd'
 import { AlertOutlined } from '@ant-design/icons'
 import Hamburger from './components/hamburger'
 import useCollapsed from '@/hooks/collapse'
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { tagViewSelector } from '@/store/slice/tagView'
+import { routerSelector } from '@/store/slice/getRoutes'
+import { addTag, setActive } from '@/store/slice/tagView'
 /*
 * 如果该菜单设置显示，并且他只有一个子路由
 * 刚好该子路由又设置了不现实，那该菜单还显示吗
@@ -37,9 +38,9 @@ function setSider(paths: IRoute[], flag?: boolean) {
 }
 
 const LayoutSider: FC = () => {
-  const { activeTag, tagList } = useSelector(({ tagViewReducer }) => tagViewReducer)
-  const paths = useSelector(({ routerReducer }) => routerReducer)
-  const { handleAddTag, handleSetActive } = useTagView()
+  const dispatch = useDispatch()
+  const { data: { activeTag, tagList } } = useSelector(tagViewSelector)
+  const { data: paths } = useSelector(routerSelector)
   const [collapse, handleCollapse] = useCollapsed()
 
   let curt = {} as IRoute
@@ -51,7 +52,7 @@ const LayoutSider: FC = () => {
   
       if (path === currentTagPath) {
         curt = { ...i }
-        pathArr.indexOf(path) < 0 && handleAddTag(curt)
+        pathArr.indexOf(path) < 0 && dispatch(addTag(curt))
       }
       if (children && children?.length > 0) {
         findTag(children, currentTagPath, tagList)
@@ -63,7 +64,7 @@ const LayoutSider: FC = () => {
   const handleClick = ({ keyPath: [currentTagPath] }: { keyPath: string[]}): void => {
     const currentTag = findTag(paths, currentTagPath, tagList)
 
-    handleSetActive(currentTag)
+    dispatch(setActive(currentTag))
   }
 
   useEffect(() => {
@@ -74,13 +75,13 @@ const LayoutSider: FC = () => {
     * 因为如果配的第一个菜单不是dashboard组件就尴尬了
     */
     const route = paths[0]
-    handleSetActive(route)
+    dispatch(setActive(route))
     /*
     * 不判断taglist长度的话
     * 开发的时候每次修改文件
     * 他都默认往里push一个，忒烦。。。
     */
-    !tagList.length && route && handleAddTag(route)
+    !tagList.length && route && dispatch(addTag(route))
   }, [paths])
 
   return (

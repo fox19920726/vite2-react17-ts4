@@ -7,8 +7,8 @@ import LayoutContent from './components/layoutContent'
 import TagView from '@/views/Layout/tagView'
 
 const ContentMain: FC = () => {
-  const [handleInfo] = useUserInfo()
-  const [handleAsyncRoutes] = useRouteList()
+  const { handleInfo } = useUserInfo()
+  const handleAsyncRoutes = useRouteList()
 
   useEffect(() => {
     /*
