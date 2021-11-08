@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom'
 import { IRoute, ITagMenu } from '@/tsTypes/menuInterface.d'
 import './index.scss'
 import ContextMenu from './components/contextMenu'
-import { setActive, removeTag } from '@/store/slice/tagView'
+import { setActive, removeTag, addTag } from '@/store/slice/tagView'
 import { tagViewSelector } from '@/store/slice/tagView'
+import { routerSelector } from '@/store/slice/getRoutes'
 
 
 const menuItem = { left: 0, top: 0, item: {} } as ITagMenu
@@ -14,7 +15,9 @@ const menuItem = { left: 0, top: 0, item: {} } as ITagMenu
 const TagView: FC = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const { location: { pathname } } = history
   const { data: { activeTag, tagList, deleteItem } } = useSelector(tagViewSelector)
+  const { data: paths } = useSelector(routerSelector)
   const [{ left, top, item }, setState] = useState(menuItem)
 
   const handleClickTag = (i: IRoute) => {
@@ -42,10 +45,20 @@ const TagView: FC = () => {
     setState(menuItem)
   }
 
+  const setHashTag = (paths: IRoute[]) => {
+    paths.forEach((item) => {
+      const { path, children } = item
+      const oi = tagList.filter((i) => i.path === path)
+      // 找到的路由不在tagList列表里，就加进tagList
+      path === pathname && !oi.length && (dispatch(addTag(item)))
+      // 否则就继续递归找
+      children && children.length && setHashTag(children)
+    })
+  }
+
   useEffect(() => {
     const activeTagPath = activeTag?.path
     const deleteItemPath = deleteItem?.path
-    
     /*
     * 这里其实得优化
     * 目前判断了关闭的tag是不是当前激活状态的tag
@@ -69,6 +82,11 @@ const TagView: FC = () => {
       document.removeEventListener('click', handleCloseMenu)
     }
   }, [])
+
+  useEffect(() => {
+    // 页面手动刷新的时候，查找到当前的hash地址，定位路由
+    setHashTag(paths)
+  }, [paths])
 
   return (
     <div className="tagview-container">

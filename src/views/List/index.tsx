@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Button } from 'antd'
 import { useSelector } from 'react-redux'
 import { userInfoSelector } from '@/store/slice/getInfo'
@@ -8,6 +8,9 @@ import { useUserInfo } from '@/hooks'
 const List: FC = () => {
   const { data: { userName, roleName } } = useSelector(userInfoSelector)
   const { handleInfo } = useUserInfo()
+  useEffect(() => {
+    handleInfo()
+  }, [])
   return (
     <div>
       <p>我叫：{userName}</p>

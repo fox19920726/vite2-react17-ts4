@@ -60,6 +60,11 @@ const paths: IRoute[] = [{
   'component': 'Todo',
   'show': true,
   'meta': { 'title': '导航4' }
+}, {
+  'path': '/reload',
+  'component': 'Reloador',
+  'show': false,
+  'meta': { 'title': 'reload' }
 }]
 
 export default paths
