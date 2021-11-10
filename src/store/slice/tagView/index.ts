@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '@/store'
-import { ITagViewAction } from '@/tsTypes/menuInterface.d'
-
-const initialState = {
-  activeTag: {},
-  deleteItem: {},
-  menuItem: {},
-  tagList: []
-} as ITagViewAction
+import { IRoute, ITagViewAction } from '@/tsTypes/menuInterface.d'
 
 const tagViewSlice = createSlice({
   name: 'tagView',
   initialState: {
-    data: initialState
+    data: {
+      activeTag: {} as IRoute,
+      deleteItem: {} as IRoute,
+      menuItem: {} as IRoute,
+      tagList: [] as IRoute[]
+    }
   },
   reducers: {
     addTag: (state, { payload }) => {

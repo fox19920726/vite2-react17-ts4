@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Layout } from 'antd'
-import { Switch, Route, useHistory } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import { IRoute } from '@/tsTypes/menuInterface.d'
 import components from '@/router/components'
 import { useSelector } from 'react-redux'
@@ -23,7 +23,7 @@ function setRoute(paths: IRoute[]): any {
 }
 
 const LayoutContent: FC = () => {
-  const { location: { pathname } } = useHistory()
+  const { pathname } = useLocation()
   const { data: paths } = useSelector(routerSelector)
 
   return (

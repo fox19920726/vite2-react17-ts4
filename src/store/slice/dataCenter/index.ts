@@ -1,22 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '@/store'
-import _ from 'lodash'
-import { IRoute } from '@/tsTypes/menuInterface'
 
-const initialState = [] as IRoute[]
+interface TData {
+  [key: string]: any
+}
 
-const routerSlice = createSlice({
+const dataCenterSlice = createSlice({
   name: 'routers',
   initialState: {
-    data: initialState
+    /* 
+    * 存数据的容器
+    * 必须以键值对的形式存储
+    * 例如：
+    * data: {
+    *   list: {},
+    *   info: []
+    * }
+    */
+    data: {} as TData
   },
   reducers: {
-    setRoutes: (state, action) => {
-			state.data = _.uniqWith([...state.data, ...action.payload], _.isEqual)
+    setData: (state, { payload }) => {
+      const { type, data } = payload
+      state.data[type] = data
+    },
+    clearData: (state, { payload }) => {
+      const { type } = payload
+      state.data[type] = ''
     }
   }
 })
 
-export const { setRoutes } = routerSlice.actions
-export const routerSelector = (state: RootState) => state.routerSlice
-export default routerSlice.reducer
+export const { setData, clearData } = dataCenterSlice.actions
+export const dataSelector = (state: RootState) => state.dataCenterSlice
+export default dataCenterSlice.reducer

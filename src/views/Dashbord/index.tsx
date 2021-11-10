@@ -20,7 +20,7 @@ const Dashbord: FC = () => {
 
   // hook的执行是有顺序的
   useEffect(() => {
-    console.log(1)
+    console.log('dashboard')
   }, [])
 
   return (

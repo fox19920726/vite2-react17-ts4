@@ -1,11 +1,12 @@
 import React, { FC, useEffect } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 
-const Reloador: FC = (props) => {
+const Reloador: FC = () => {
 	const history = useHistory()
+  const { state: { path } } = useLocation<{path?: string}>()
 
   useEffect(() => {
-    history.replace(props?.location?.state?.path || '/')
+    history.replace(path || '/')
   }, [])
 
   return (
