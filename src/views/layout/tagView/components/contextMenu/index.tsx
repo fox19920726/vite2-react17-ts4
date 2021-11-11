@@ -4,6 +4,7 @@ import './index.scss'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setActive, removeOtherTags, removeAllTags, tagViewSelector } from '@/store/slice/tagView'
+import { clearCurrentData, clearOtherData, clearAllData } from '@/store/slice/dataCenter'
 
 const ContextMenu: FC<ITagMenu> = (props) => {
   const { left, top, item } = props
@@ -18,6 +19,7 @@ const ContextMenu: FC<ITagMenu> = (props) => {
       pathname: '/reload',
       state: { path }
     })
+    dispatch(clearCurrentData(path))
     /* 
     * 如果要设计刷新功能，前提必须实现页面的缓存
     * 页面缓存设计得再考虑考虑，因为react-router本身不支持缓存
@@ -43,9 +45,11 @@ const ContextMenu: FC<ITagMenu> = (props) => {
     * 要把当前的menuItem设置为激活
     * 并跳转到对应路由
     */
+   const { path } = item
     dispatch(removeOtherTags(item))
     dispatch(setActive(item))
-    history.replace(item.path)
+    history.replace(path)
+    dispatch(clearOtherData(path))
   }
 
   const handleCloseAllTags = () => {
@@ -58,6 +62,7 @@ const ContextMenu: FC<ITagMenu> = (props) => {
     dispatch(removeAllTags())
     dispatch(setActive(item))
     history.replace(item.path)
+    dispatch(clearAllData())
   }
 
   return (

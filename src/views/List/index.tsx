@@ -5,10 +5,12 @@ import { userInfoSelector } from '@/store/slice/getInfo'
 import { useUserInfo } from '@/hooks'
 import { setData, dataSelector } from '@/store/slice/dataCenter'
 import { useForm } from 'antd/lib/form/Form'
+import { useLocation } from 'react-router'
 
 // Consumer下面只能写一个函数
 
 const List: FC = () => {
+  const { pathname } = useLocation()
   const { data: { userName, roleName } } = useSelector(userInfoSelector)
   // 进入组件时读取缓存在store的数据
   const { data } = useSelector(dataSelector)
@@ -25,17 +27,17 @@ const List: FC = () => {
 
   useEffect(() => {
     // 回填表单数据
-    form.setFieldsValue({ address: data?.list?.address })
+    console.log(data)
+    form.setFieldsValue({ address: data[pathname]?.address })
     // 回填存储的数据
-    setState({ userInfo: { a: 1 }, address: data?.list?.address })
+    setState({ userInfo: { a: 1 }, address: data[pathname]?.address })
     // 请求用户信息-demo
     handleInfo()
   }, [])
 
   useEffect(() => {
-    return () => {
-      dispatch(setData({ type: 'list', data: state }))
-    }
+    // 每次state发生变更就去记录到store中
+    dispatch(setData({ type: pathname, data: state }))
   }, [state])
 
   return (
