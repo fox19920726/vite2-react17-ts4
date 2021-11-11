@@ -8,6 +8,7 @@ import ContextMenu from './components/contextMenu'
 import { setActive, removeTag, addTag } from '@/store/slice/tagView'
 import { tagViewSelector } from '@/store/slice/tagView'
 import { routerSelector } from '@/store/slice/getRoutes'
+import { clearCurrentData } from '@/store/slice/dataCenter'
 
 const menuItem = { left: 0, top: 0, item: {} } as ITagMenu
 
@@ -26,6 +27,7 @@ const TagView: FC = () => {
 
   const handleCloseTag = (i: IRoute) => {
     dispatch(removeTag(i))
+    dispatch(clearCurrentData(i.path))
   }
 
   const handleOpenMenu = (i: IRoute, e: React.MouseEvent) => {

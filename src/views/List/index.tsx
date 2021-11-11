@@ -5,10 +5,12 @@ import { userInfoSelector } from '@/store/slice/getInfo'
 import { useUserInfo } from '@/hooks'
 import { setData, dataSelector } from '@/store/slice/dataCenter'
 import { useForm } from 'antd/lib/form/Form'
+import { useLocation } from 'react-router'
 
 // Consumer下面只能写一个函数
 
 const List: FC = () => {
+  const { pathname } = useLocation()
   const { data: { userName, roleName } } = useSelector(userInfoSelector)
   // 进入组件时读取缓存在store的数据
   const { data } = useSelector(dataSelector)
@@ -24,20 +26,19 @@ const List: FC = () => {
   }
 
   useEffect(() => {
-    // 回填表单数据，真实的业务场景应该是从接口请求过来数据，然后填充表单
-    form.setFieldsValue({ address: data?.list?.address })
-    // 回填存储的数据，比如flag字段什么的
-    setState({ ...state, address: data?.list?.address })
+    // 回填表单数据
+    console.log(data)
+    form.setFieldsValue({ address: data[pathname]?.address })
+    // 回填存储的数据
+    setState({ userInfo: { a: 1 }, address: data[pathname]?.address })
     // 请求用户信息-demo，这种调用更改store数据的方法要谨慎，因为只要有用到这批数据的组件，都会发生重新渲染
-    handleInfo()
-    console.log(6)
+    // handleInfo()
+    // console.log(6)
   }, [])
 
   useEffect(() => {
-    // 退出组件时，存下数据
-    return () => {
-      dispatch(setData({ type: 'list', data: state }))
-    }
+    // 每次state发生变更就去记录到store中
+    dispatch(setData({ type: pathname, data: state }))
   }, [state])
 
   return (
