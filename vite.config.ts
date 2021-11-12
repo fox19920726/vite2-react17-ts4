@@ -18,8 +18,10 @@ export default defineConfig({
       }
     }
   },
-  // 静态文件目录
+  // 静态文件目录, 引用img图片的时候得用绝对路径：./images/xxx.png
   publicDir: 'src/static',
+  // 文件资源的根目录
+  base: './',
   plugins: [
     reactRefresh(),
     gzipPlugin(),
@@ -57,8 +59,20 @@ export default defineConfig({
         entryFileNames: 'js/[name].[hash].js',
         chunkFileNames: 'js/[name].[hash].js',
         assetFileNames: 'css/[name].[hash].[ext]'
+        // 拆分包
+        // manualChunks(id) {
+        //   if (id.includes('node_modules')) {
+        //     return 'vendor'
+        //   }
+        // }
       }
-    }
+    },
+    /*
+    * 毙了狗了，如果我直接从static目录下以./images/xxx.png的方式引用图片
+    * 压根就他喵的不会被打成base64, 他是必须是用import的方式去引入图片
+    * 才能按照assetsInlineLimit的限制去打成base64, 才能产出带hash地址的图片地址
+    */
+    assetsInlineLimit: 100000
   },
   /* 
   * 其实这里只要全局注入后其他地方就可以不用手动注入了

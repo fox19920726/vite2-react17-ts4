@@ -8,6 +8,7 @@ import { ILogin } from '@/tsTypes/userInterface.d'
 import './index.scss'
 import { Button, Form, Input } from 'antd'
 import { userInfoSelector } from '@/store/slice/getInfo'
+import logo from '@/static/images/logo.png'
 
 const Login: FC = () => {
   const history = useHistory()
@@ -47,7 +48,8 @@ const Login: FC = () => {
 
   return ( 
     <div className="login-container">
-      <img src="/images/logo.png" alt="这张图纯粹是为了测试静态资源文件夹设置的是否正确" />
+      <img src={logo} />
+      {/* <img src='./images/logo.png' alt="这张图纯粹是为了测试静态资源文件夹设置的是否正确" /> */}
       <Form
         name="loginForm"
         labelCol={{ span: 6 }}
