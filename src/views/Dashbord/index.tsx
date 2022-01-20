@@ -26,6 +26,7 @@ const Dashbord: FC = () => {
   return (
     <div>
       <p>
+        我是页面内容
         You clicked {count} times
       </p>
       <button onClick={handleClick}>

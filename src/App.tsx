@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import '@/styles/App.scss'
 import { Provider } from 'react-redux'
 import store from '@/store'
-import LayoutMain from '@/views/Layout'
+import ContentMain from './views/Layout'
 
 const history = createHashHistory()
 
@@ -14,7 +14,7 @@ const App: FC = () => {
     <Provider store={store}>
       <Router history={history}>
         <div className="app">
-          <LayoutMain />
+          <ContentMain />
         </div>
       </Router>
     </Provider>

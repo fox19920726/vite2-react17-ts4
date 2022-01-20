@@ -8,7 +8,7 @@ import { ILogin } from '@/tsTypes/userInterface.d'
 import './index.scss'
 import { Button, Form, Input } from 'antd'
 import { userInfoSelector } from '@/store/slice/getInfo'
-import logo from '@/static/images/logo.png'
+import logo from '/images/logo.png'
 
 const Login: FC = () => {
   const history = useHistory()

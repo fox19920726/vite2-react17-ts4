@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Layout } from 'antd'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import { IRoute } from '@/tsTypes/menuInterface.d'
@@ -6,14 +6,14 @@ import components from '@/router/components'
 import { useSelector } from 'react-redux'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
-import { routerSelector } from '@/store/slice/getRoutes'
+import routes from '@/router/routers'
+// import { routerSelector } from '@/store/slice/getRoutes'
 
 const { Content } = Layout
 
-function setRoute(paths: IRoute[]): any {
+function setRoute(routes: IRoute[]): any {
   return (
-    paths.map((item) => {
-      const { children, path, component } = item
+    routes.map(({ children, path, component }) => {
       if(children?.length){
         return setRoute(children)
       }
@@ -24,7 +24,7 @@ function setRoute(paths: IRoute[]): any {
 
 const LayoutContent: FC = () => {
   const { pathname } = useLocation()
-  const { data: paths } = useSelector(routerSelector)
+  // const { data: paths } = useSelector(routerSelector)
 
   return (
     <Layout>
@@ -37,7 +37,7 @@ const LayoutContent: FC = () => {
             exit={false}
           >
             <Switch>
-              {setRoute(paths)}
+              {setRoute(routes)}
             </Switch>
           </CSSTransition>
         </TransitionGroup>

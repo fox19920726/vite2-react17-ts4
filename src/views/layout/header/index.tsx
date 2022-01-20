@@ -1,10 +1,13 @@
 import React, { FC } from 'react'
 import { Layout, Row, Col } from 'antd'
+import { createHashHistory } from 'history'
 import { LoginOutlined } from '@ant-design/icons'
 import './index.scss'
 import { useUserInfo } from '@/hooks'
 
+const history = createHashHistory()
 const { Header } = Layout
+
 
 const LayoutHeader: FC = () => {
   /*

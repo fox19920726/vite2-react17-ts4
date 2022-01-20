@@ -28,18 +28,3 @@ export interface IAsyncRoute {
 	msg: string
 	code: number
 }
-
-// tagView action
-export interface ITagViewAction {
-  activeTag: IRoute
-  deleteItem: IRoute
-  menuItem: IRoute
-  tagList: IRoute[]
-}
-
-// 右键tagview
-export interface ITagMenu {
-  left: number
-  top: number
-  item: IRoute
-}

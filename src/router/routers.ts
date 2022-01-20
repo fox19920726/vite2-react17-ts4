@@ -12,54 +12,13 @@ import { IRoute } from '@/tsTypes/menuInterface.d'
 const paths: IRoute[] = [{
   'path': '/',
   'component': 'Dashbord',
-  'show': false,
-  'meta': { 'title': '主页面' }
-}, {
-  'path': '/multy',
-  'meta': { 'title': '导航1' },
   'show': true,
-  'children': [{
-    'path': '/multy/a',
-    'show': true,
-    'meta': { 'title': '导航1-1' },
-    'children': [{
-      'path': '/multy/a/b',
-      'show': true,
-      'meta': { 'title': '导航1-1-1' },
-      'children': [{
-        'path': '/multy/a/b/c',
-        'component': 'List',
-        'show': true,
-        'children': [],
-        'meta': { 'title': '导航1-1-1-1' }
-      }, {
-        'path': '/multy/a/b/d',
-        'component': 'Todo',
-        'show': true,
-        'meta': { 'title': '导航1-1-1-2' }
-      }]
-    }]
-  }, {
-    'path': '/multy/e',
-    'component': 'Todo',
-    'show': true,
-    'meta': { 'title': '导航1-2' }
-  }]
+  'meta': { 'title': '主页面1' }
 }, {
-  'path': '/luluya',
-  'component': 'Todo',
+  'path': '/a',
+  'component': 'Dashbord',
   'show': true,
-  'meta': { 'title': '导航2' }
-}, {
-  'path': '/list',
-  'component': 'List',
-  'show': true,
-  'meta': { 'title': '导航3' }
-}, {
-  'path': '/todo',
-  'component': 'Todo',
-  'show': true,
-  'meta': { 'title': '导航4' }
+  'meta': { 'title': '主页面2' }
 }, {
   'path': '/reload',
   'component': 'Reloador',

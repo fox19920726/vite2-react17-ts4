@@ -12,21 +12,10 @@ const list = Mock.mock({
 
 const asyncRoutes = Mock.mock({
   'rows': [{
-    'path': '/asyncTodo',
-    'component': 'Todo',
+    'path': '/a',
+    'component': 'Dashbord',
     'show': true,
-    'meta': { 'title': '异步导航5' },
-    'children': [{
-      'path': '/asyncTodo/a',
-      'component': 'List',
-      'show': true,
-      'meta': { 'title': '异步导航5-1' }
-    }]
-  }, {
-    'path': '/asyncList',
-    'component': 'Todo',
-    'show': true,
-    'meta': { 'title': '异步导航6' }
+    'meta': { 'title': 'fafafa' }
   }],
   'msg': '成功',
   'code': 200
