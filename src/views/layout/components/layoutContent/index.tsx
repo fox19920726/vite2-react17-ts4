@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { Layout } from 'antd'
+import React, { FC, useRef } from 'react'
+import { Layout, Button } from 'antd'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import { IRoute } from '@/tsTypes/menuInterface.d'
 import components from '@/router/components'
@@ -24,25 +24,31 @@ function setRoute(routes: IRoute[]): any {
 
 const LayoutContent: FC = () => {
   const { pathname } = useLocation()
-  // const { data: paths } = useSelector(routerSelector)
+  const wraper = useRef(null)
+  const handleClick = (e) => {
+    console.log('wraper:', wraper.current)
+  }
 
   return (
-    <Layout>
-      <Content className="content">
-        <TransitionGroup>
-          <CSSTransition
-            key={pathname}
-            timeout={200}
-            classNames="fade"
-            exit={false}
-          >
-            <Switch>
-              {setRoute(routes)}
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      </Content>
-    </Layout>
+    <div ref={wraper}>
+      <Layout>
+        <Button type="primary" style={{ width: '100px', margin: '0 auto' }} onClick={handleClick}>生成</Button>
+        <Content className="content">
+          <TransitionGroup>
+            <CSSTransition
+              key={pathname}
+              timeout={200}
+              classNames="fade"
+              exit={false}
+            >
+              <Switch>
+                {setRoute(routes)}
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        </Content>
+      </Layout>
+    </div>
   )
 }
 export default LayoutContent
