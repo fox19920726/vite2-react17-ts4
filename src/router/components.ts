@@ -1,15 +1,13 @@
-// import { FC } from 'react'
-import { IComponent } from '@/tsTypes/menuInterface.d'
-import Dashbord from '@/views/Dashbord'
-import List from '@/views/List'
-import Login from '@/views/Login'
-import Todo from '@/views/Todo'
-import Reloador from '@/views/reload'
+const modules = import.meta.glob('../**/index.tsx')
 
-export default {
-    Reloador,
-    Dashbord,
-    List,
-    Login,
-    Todo
-} as IComponent
+async function getModules() {
+	const comps = {}
+	for (const path in modules) {
+		const mod = await modules[path]()
+		comps[mod.default.name] = mod.default
+	}
+	return comps
+}
+
+
+export default getModules()
